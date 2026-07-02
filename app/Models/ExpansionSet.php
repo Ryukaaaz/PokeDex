@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Card;
 
 class ExpansionSet extends Model
 {
@@ -16,4 +18,8 @@ class ExpansionSet extends Model
         'printed_total',
         'total'
     ];
+
+    public function cards(): HasMany{
+        return $this->hasMany(Card::class);
+    }
 }

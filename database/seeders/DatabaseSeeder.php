@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\Master\ExpansionSetSeeder;
+use Database\Seeders\Master\CardSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             ExpansionSetSeeder::class,
+            CardSeeder::class,
         ]);
     }
 }
