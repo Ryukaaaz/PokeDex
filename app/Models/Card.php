@@ -16,8 +16,11 @@ class Card extends Model
         'rarity',
         'grade'
     ];
-    
-    public function expansionSet():BelongsTo{
+    /**
+     * @return BelongsTo<ExpansionSet, Card>
+     */
+    public function expansionSet(): BelongsTo
+    {
         return $this->belongsTo(ExpansionSet::class);
     }
 }

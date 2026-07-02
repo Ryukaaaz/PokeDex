@@ -19,7 +19,11 @@ class ExpansionSet extends Model
         'total'
     ];
 
-    public function cards(): HasMany{
+    /**
+     * @return HasMany<Card, ExpansionSet>
+     */
+    public function cards(): HasMany
+    {
         return $this->hasMany(Card::class);
     }
 }
