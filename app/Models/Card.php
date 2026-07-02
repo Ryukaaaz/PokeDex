@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\ExpansionSet;
 
 class Card extends Model
 {
@@ -17,7 +16,7 @@ class Card extends Model
         'grade'
     ];
     /**
-     * @return BelongsTo<ExpansionSet, Card>
+     * @return BelongsTo<ExpansionSet, $this>
      */
     public function expansionSet(): BelongsTo
     {

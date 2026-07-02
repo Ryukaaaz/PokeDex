@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\Card;
 
 class ExpansionSet extends Model
 {
@@ -20,7 +19,7 @@ class ExpansionSet extends Model
     ];
 
     /**
-     * @return HasMany<Card, ExpansionSet>
+     * @return HasMany<Card, $this>
      */
     public function cards(): HasMany
     {
