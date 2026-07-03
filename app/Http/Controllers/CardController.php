@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ExpansionSet;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -28,12 +29,12 @@ class CardController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): Response
     {
         return Inertia::render('Card/create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         @dd($request);
         // validate
@@ -41,5 +42,6 @@ class CardController extends Controller
         // store
 
         // return view
+        return redirect()->route('cards.index');
     }
 }
