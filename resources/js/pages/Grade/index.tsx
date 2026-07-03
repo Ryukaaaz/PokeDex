@@ -3,7 +3,7 @@ import { index as GradeIndex } from '@/routes/grade'
 Index.layout = {
     breadcrumbs: [
         {
-            title: 'Rarity',
+            title: 'Grade',
             href: GradeIndex(),
         },
     ],
@@ -21,9 +21,9 @@ type Props = {
 export default function Index({ grades }: Props) {
     return (
         <>
-            <Head title="Rarity pages" />
+            <Head title="Grade pages" />
             <div className="overflow-x-auto p-4">
-                <h1>List Of Rarity</h1>
+                <h1>List Of Grade</h1>
                 <table className="table">
                     <thead>
                         <tr>
