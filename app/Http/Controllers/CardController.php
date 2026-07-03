@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Card;
 use App\Models\ExpansionSet;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -16,10 +15,31 @@ class CardController extends Controller
     public function index(int $expansionSetId): Response
     {
         // $card = Card::where('expansion_set_id',$expansionSetId)->get();
-        $expansionSet= expansionSet::with('cards')->findOrFail($expansionSetId);
+        $expansionSet = expansionSet::with([
+            'cards.rarity',
+            'cards.grade',
+        ])->findOrFail($expansionSetId);
+        // @dd($expansionSet->cards);
         //using the eloquent relationship
         return Inertia::render('Card/index', [
             'cards' => $expansionSet->cards,
+            'expansionSetName' => $expansionSet->name,
+            'expansionSetSeries' => $expansionSet->series,
         ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('Card/create');
+    }
+
+    public function store(Request $request)
+    {
+        @dd($request);
+        // validate
+
+        // store
+
+        // return view
     }
 }

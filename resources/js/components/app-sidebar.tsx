@@ -14,6 +14,9 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
+import {index as ExpansionIndex } from '@/routes/expansion'
+import {index as RarityIndex } from '@/routes/rarity'
+import {index as GradeIndex } from '@/routes/grade'
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -24,22 +27,32 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'ExpansionSet',
-        href: '/expansion-sets',
+        href: ExpansionIndex(),
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Rarity',
+        href: RarityIndex(),
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Grade',
+        href: GradeIndex(),
         icon: LayoutGrid,
     },
 ];
 
 const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: FolderGit2,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
-    },
+    // {
+    //     title: 'Repository',
+    //     href: 'https://github.com/laravel/react-starter-kit',
+    //     icon: FolderGit2,
+    // },
+    // {
+    //     title: 'Documentation',
+    //     href: 'https://laravel.com/docs/starter-kits#react',
+    //     icon: BookOpen,
+    // },
 ];
 
 export function AppSidebar() {

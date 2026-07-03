@@ -19,22 +19,22 @@ class CardSeeder extends Seeder
                 'expansion_set_id' => 1,
                 'name' => 'Pikachu',
                 'card_number' => 1,
-                'rarity' => 'Common',
-                'grade' => 'Raw',
+                'rarity_id' => '1',
+                'grade_id' => '1',
             ],
             [
                 'expansion_set_id' => 1,
                 'name' => 'Charmander',
                 'card_number' => 2,
-                'rarity' => 'Common',
-                'grade' => '10',
+                'rarity_id' => '1',
+                'grade_id' => '11',
             ],
             [
                 'expansion_set_id' => 2,
                 'name' => 'Squirtle',
                 'card_number' => 1,
-                'rarity' => 'Common',
-                'grade' => 'Raw',
+                'rarity_id' => '2',
+                'grade_id' => '1',
             ],
 
         ];

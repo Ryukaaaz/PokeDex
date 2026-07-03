@@ -1,5 +1,6 @@
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { useState } from 'react';
+import {create as createNewCard} from '@/routes/cards'
 
 Index.layout = {
     breadcrumbs: [
@@ -10,35 +11,51 @@ Index.layout = {
     ],
 };
 
+type Rarity = {
+    id: number;
+    name: string;
+};
+
+type Grade = {
+    id: number;
+    name: string;
+};
+
 type Card = {
     id: number;
     name: string;
     card_number: number;
-    rarity: string;
-    grade: string;
+    rarity_id: number;
+    grade_id: number;
     expansion_set_id: number;
+    rarity: Rarity;
+    grade: Grade;
 };
 
 type Props = {
     cards: Card[];
+    expansionSetName: string;
+    expansionSetSeries: string;
 }
 
 
 
-export default function Index({ cards }: Props) {
+export default function Index({ expansionSetName,expansionSetSeries,cards }: Props) {
     const [selectedCard, setSelectedCard] = useState<Card | null>(null);
     return (
         <>
             <Head title="Expansion Sets" />
             {/* <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"> */}
             <h2 className="text-2xl font-bold p-4">{cards.length} cards found.</h2>
-
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3 overflow-y-hidden rounded-xl p-4">
+            <Link className='p-4' 
+            href={createNewCard()}>
+                <button className="btn btn-soft btn-info">+ Insert New Card Found</button>
+            </Link>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4 rounded-xl p-4">
                 {cards.map((card) => (
-
                     <div key={card.id} className="hover-3d" onClick={() => setSelectedCard(card)}>
                         {/* <!-- content --> */}
-                        <figure className="w-60 rounded-2xl">
+                        <figure className="w-full rounded-2xl">
                             <img src="https://img.daisyui.com/images/stock/card-1.webp?x" alt={card.name} />
                         </figure>
                         {/* <!-- 8 empty divs needed for the 3D effect --> */}
@@ -85,7 +102,7 @@ export default function Index({ cards }: Props) {
                                     </h1>
 
                                     <p className="text-base-content/60 mt-2">
-                                        Scarlet & Violet • White Flare
+                                        {expansionSetSeries} • {expansionSetName}
                                     </p>
                                 </div>
 
@@ -100,7 +117,7 @@ export default function Index({ cards }: Props) {
                                         </span>
 
                                         <span>
-                                            {selectedCard.expansion_set_id}
+                                            {expansionSetName}
                                         </span>
                                     </div>
 
@@ -118,7 +135,7 @@ export default function Index({ cards }: Props) {
                                         </span>
 
                                         <span>
-                                            {selectedCard.rarity}
+                                            {selectedCard.rarity.name}
                                         </span>
                                     </div>
 
@@ -128,7 +145,7 @@ export default function Index({ cards }: Props) {
                                         </span>
 
                                         <span>
-                                            {selectedCard.grade}
+                                            {selectedCard.grade.name}
                                         </span>
                                     </div>
 

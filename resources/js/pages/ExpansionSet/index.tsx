@@ -1,5 +1,5 @@
 import { Head,Link } from '@inertiajs/react';
-// import { Link } from 'lucide-react';
+import {index as cardIndex } from '@/routes/cards'
 
 Index.layout = {
     breadcrumbs: [
@@ -34,12 +34,14 @@ export default function Index({ expansionSets }: Props) {
             {/* <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"> */}
             <h2 className="text-2xl font-bold p-4">{expansionSets.length} expansion sets found.</h2>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3 overflow-y-hidden rounded-xl p-4">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3 rounded-xl p-4">
                 {expansionSets.map((expansion) => (
                     <Link
                         key={expansion.id}
-                        href={`/cards/${expansion.id}`}>
-                        <div className="card bg-base-100 w-96 shadow-sm transition hover:shadow-xl hover:-translate-y-1 duration-300">
+                        className="block w-full"
+                        // href={`/cards/${expansion.id}`}>
+                        href={cardIndex(expansion.id)}>
+                        <div className="card bg-base-100 w-full shadow-sm transition hover:shadow-xl hover:-translate-y-1 duration-300">
                             <figure className="relative">
                                 <img
                                     src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"

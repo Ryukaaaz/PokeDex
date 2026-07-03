@@ -19,10 +19,10 @@ return new class extends Migration
             //to store the pokemon name for the card
             $table->integer('card_number');
             //to store the card number for the card
-            $table->string('rarity');
-            //to store the rarity for the card
-            $table->string('grade')->default('Raw');
-            //to store the grade for the card, default to 'Raw'
+            $table->foreignId('rarity_id')->constrained()->restrictOnDelete();
+            //to store the rarity id for the card
+            $table->foreignId('grade_id')->default('1')->constrained()->restrictOnDelete();
+            //to store the grade for the card, default to '1' / Raw
             $table->timestamps();
         });
     }

@@ -22,4 +22,20 @@ class Card extends Model
     {
         return $this->belongsTo(ExpansionSet::class);
     }
+
+    /**
+     * @return BelongsTo<Rarity, $this>
+     */
+    public function rarity(): BelongsTo
+    {
+        return $this->belongsTo(Rarity::class);
+    }
+
+    /**
+     * @return BelongsTo<Grade, $this>
+     */
+    public function grade(): BelongsTo
+    {
+        return $this->belongsTo(Grade::class);
+    }
 }

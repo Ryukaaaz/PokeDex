@@ -7,6 +7,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\Master\ExpansionSetSeeder;
 use Database\Seeders\Master\CardSeeder;
+use Database\Seeders\Master\GradeSeeder;
+use Database\Seeders\Master\RaritySeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +23,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             ExpansionSetSeeder::class,
+            GradeSeeder::class,
+            RaritySeeder::class,
             CardSeeder::class,
         ]);
     }
