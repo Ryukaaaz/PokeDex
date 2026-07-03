@@ -36,7 +36,7 @@ class CardController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        @dd($request);
+        // @dd($request);
         // validate
 
         // store
