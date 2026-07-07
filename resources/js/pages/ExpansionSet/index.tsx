@@ -1,6 +1,5 @@
 import { Head, Link, router, useForm } from '@inertiajs/react';
 import { index as cardIndex } from '@/routes/cards'
-import { useState } from 'react';
 import FormSelect from '@/components/form/FormSelect';
 
 Index.layout = {
