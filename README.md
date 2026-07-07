@@ -10,14 +10,12 @@ TradeDex is a modern Inventory Management System (IMS) and Point of Sale (POS) a
 - Manage customer transactions
 - Track profit and loss
 - Support sealed products and accessories
-- Integrate with Pokémon TCG APIs
 
 ## Core Features
 
 ### Inventory Management
 
 - Add Pokémon cards
-- Bulk import cards
 - Inventory adjustments
 - Card variants
 - Graded cards
