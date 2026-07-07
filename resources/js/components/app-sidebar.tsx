@@ -26,7 +26,7 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'ExpansionSet',
+        title: 'Cards',
         href: ExpansionIndex(),
         icon: LayoutGrid,
     },

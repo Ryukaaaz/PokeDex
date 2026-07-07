@@ -1,5 +1,7 @@
-import { Head,Link } from '@inertiajs/react';
-import {index as cardIndex } from '@/routes/cards'
+import { Head, Link, router, useForm } from '@inertiajs/react';
+import { index as cardIndex } from '@/routes/cards'
+import { useState } from 'react';
+import FormSelect from '@/components/form/FormSelect';
 
 Index.layout = {
     breadcrumbs: [
@@ -23,17 +25,88 @@ type Expansion = {
 
 type Props = {
     expansionSets: Expansion[];
+    allExpansionSets: Expansion[];
+    filters: {
+        series: string;
+        name: string;
+    }
 }
 
 
 
-export default function Index({ expansionSets }: Props) {
+export default function Index({
+    expansionSets,
+    allExpansionSets,
+    filters: InitialFilters,
+}: Props) {
+    const [search, setSearch] = useState('');
+    const filters = useForm({
+        series: InitialFilters.series ?? '',
+        name: InitialFilters.name ?? '',
+    })
+
+    const seriesOptions = [
+        ...new Set(allExpansionSets.map((expansion) => expansion.series)),
+    ].map((series) => ({
+        value: series,
+        label: series
+    }))
+
+    const filteredNameOPtions = allExpansionSets.filter((expansion) => {
+        if (!filters.data.series) return true;
+        return expansion.series === filters.data.series;
+    }).map((expansion) => ({
+        value: expansion.name,
+        label: expansion.name,
+    }));
+
+    function submit(e: React.SyntheticEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        router.get('/expansion-sets', {
+            series: filters.data.series ?? '',
+            name: filters.data.name ?? '',
+        });
+
+        //shorter way
+        // router.get('/expansion-sets',filters.data);
+    }
     return (
         <>
-            <Head title="Expansion Sets" />
-            {/* <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"> */}
+            <Head title="Cards" />
+
             <h2 className="text-2xl font-bold p-4">{expansionSets.length} expansion sets found.</h2>
 
+
+
+            {/* Search bar */}
+            <div className='p-4'>
+                <form onSubmit={submit}
+                    className='flex gap-4 items-end'>
+                    <FormSelect
+                        label='series'
+                        value={filters.data.series}
+                        onChange={(e) => {
+                            filters.setData('series', e.target.value);
+                            filters.setData('name','');
+                        }}
+                        options={seriesOptions}
+                        error={filters.errors.series}
+                    />
+                    <FormSelect
+                        label='name'
+                        value={filters.data.name}
+                        onChange={(e) =>
+                            filters.setData('name', e.target.value)
+                        }
+                        options={filteredNameOPtions}
+                        error={filters.errors.name}
+                    />
+                    <button className="btn btn-primary">
+                        Search
+                    </button>
+                </form>
+            </div>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3 rounded-xl p-4">
                 {expansionSets.map((expansion) => (
                     <Link

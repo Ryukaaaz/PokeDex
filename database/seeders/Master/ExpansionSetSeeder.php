@@ -124,6 +124,15 @@ class ExpansionSetSeeder extends Seeder
                 'printed_total' => 198,
                 'total' => 258,
             ],
+            [
+                'code' => 'me2.5',
+                'name' => 'Ascended Heroes',
+                'series' => 'Mega Evolution',
+                'language' => 'EN',
+                'release_date' => '2026-01-30',
+                'printed_total' => 217,
+                'total' => 295,
+            ],
 
         ];
         // if model expansion have been created, then update or create the expansion set with the new data. If not, create a new expansion set with the data.
