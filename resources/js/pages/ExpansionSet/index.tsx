@@ -39,12 +39,12 @@ export default function Index({
     allExpansionSets,
     filters: InitialFilters,
 }: Props) {
-    const [search, setSearch] = useState('');
     const filters = useForm({
         series: InitialFilters.series ?? '',
         name: InitialFilters.name ?? '',
     })
 
+    //filtered the series options
     const seriesOptions = [
         ...new Set(allExpansionSets.map((expansion) => expansion.series)),
     ].map((series) => ({
@@ -52,6 +52,7 @@ export default function Index({
         label: series
     }))
 
+    //filtered name options upon series change
     const filteredNameOPtions = allExpansionSets.filter((expansion) => {
         if (!filters.data.series) return true;
         return expansion.series === filters.data.series;
