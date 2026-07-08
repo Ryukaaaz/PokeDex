@@ -20,7 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //cards routes
     Route::get('/cards/show/{expansionSetId}',[CardController::class,'index'])->name('cards.index')->whereNumber('expansionSetId');
     //create new card
-    Route::get('/cards/create',[CardController::class,'create'])->name('cards.create');
+    Route::get('/cards/create/{expansionSetId}',[CardController::class,'create'])->name('cards.create');
     Route::post('/cards/store',[CardController::class,'store'])->name('cards.store');
 
 

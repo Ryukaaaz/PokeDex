@@ -12,8 +12,9 @@ class Card extends Model
         'expansion_set_id',
         'name',
         'card_number',
-        'rarity',
-        'grade'
+        'rarity_id',
+        'grade_id',
+        'image',
     ];
     /**
      * @return BelongsTo<ExpansionSet, $this>

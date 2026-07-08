@@ -23,6 +23,8 @@ return new class extends Migration
             //to store the rarity id for the card
             $table->foreignId('grade_id')->default('1')->constrained()->restrictOnDelete();
             //to store the grade for the card, default to '1' / Raw
+            $table->string('image')->nullable();
+            //to store the image path
             $table->timestamps();
         });
     }

@@ -1,6 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import { useState } from 'react';
-import {create as createNewCard} from '@/routes/cards'
+import { create as createNewCard } from '@/routes/cards'
 
 Index.layout = {
     breadcrumbs: [
@@ -30,33 +30,45 @@ type Card = {
     expansion_set_id: number;
     rarity: Rarity;
     grade: Grade;
+    image: string
 };
 
 type Props = {
     cards: Card[];
     expansionSetName: string;
     expansionSetSeries: string;
+    expansionSetId: number;
 }
 
 
 
-export default function Index({ expansionSetName,expansionSetSeries,cards }: Props) {
+export default function Index({ expansionSetId, expansionSetName, expansionSetSeries, cards }: Props) {
     const [selectedCard, setSelectedCard] = useState<Card | null>(null);
     return (
         <>
             <Head title="Expansion Sets" />
             {/* <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"> */}
             <h2 className="text-2xl font-bold p-4">{cards.length} cards found.</h2>
-            <Link className='p-4' 
-            href={createNewCard()}>
-                <button className="btn btn-soft btn-info">+ Insert New Card Found</button>
-            </Link>
+            <div className='inline-block p-4'>
+                <Link className='btn btn-soft btn-info'
+                    href={createNewCard(expansionSetId)}>
+                    + Insert New Card Found
+                </Link>
+            </div>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4 rounded-xl p-4">
                 {cards.map((card) => (
                     <div key={card.id} className="hover-3d" onClick={() => setSelectedCard(card)}>
                         {/* <!-- content --> */}
-                        <figure className="w-full rounded-2xl">
-                            <img src="https://img.daisyui.com/images/stock/card-1.webp?x" alt={card.name} />
+                        <figure className="w-full h-72 rounded-2xl bg-base-200 flex items-center justify-center overflow-hidden">
+                            <img
+                                src={`/storage/${card.image}`}
+                                alt={card.name}
+                                className='w-full h-full object-contain'
+                                onError={(e) => {
+                                    e.currentTarget.src =
+                                        "https://img.daisyui.com/images/stock/card-1.webp?x";
+                                }}
+                            />
                         </figure>
                         {/* <!-- 8 empty divs needed for the 3D effect --> */}
                         <div></div>
@@ -84,11 +96,17 @@ export default function Index({ expansionSetName,expansionSetSeries,cards }: Pro
                             {/* Left Side */}
                             <div className="bg-base-200 flex items-center justify-center p-8">
 
-                                <img
-                                    src="https://img.daisyui.com/images/stock/card-1.webp?x"
-                                    alt={selectedCard.name}
-                                    className="w-72 rounded-2xl shadow-2xl transition hover:scale-105 duration-300"
-                                />
+                                <figure className="w-full h-72 rounded-2xl bg-base-200 flex items-center justify-center overflow-hidden">
+                                    <img
+                                        src={`/storage/${selectedCard.image}`}
+                                        alt={selectedCard.name}
+                                        className='w-full h-full object-contain'
+                                        onError={(e) => {
+                                            e.currentTarget.src =
+                                                "https://img.daisyui.com/images/stock/card-1.webp?x";
+                                        }}
+                                    />
+                                </figure>
 
                             </div>
 
