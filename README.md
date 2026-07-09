@@ -27,7 +27,6 @@ TradeDex is a modern Inventory Management System (IMS) and Point of Sale (POS) a
 - Barcode scanning
 - Discounts
 - Receipts
-- Customer history
 
 ### Purchasing
 
