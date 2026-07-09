@@ -22,6 +22,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //create new card
     Route::get('/cards/create/{expansionSetId}',[CardController::class,'create'])->name('cards.create');
     Route::post('/cards/store',[CardController::class,'store'])->name('cards.store');
+    //update new card
+    Route::get('/cards/edit/{cardId}',[CardController::class,'edit'])->name('cards.edit');
+    Route::patch('/cards/update/{cardId}',[CardController::class,'patch'])->name('cards.update');
 
 
     //rarity routes

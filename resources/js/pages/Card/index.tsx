@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { useState } from 'react';
 import { create as createNewCard } from '@/routes/cards'
+import { edit as EditCard } from '@/routes/cards';
 
 Index.layout = {
     breadcrumbs: [
@@ -16,20 +17,13 @@ type Rarity = {
     name: string;
 };
 
-type Grade = {
-    id: number;
-    name: string;
-};
-
 type Card = {
     id: number;
     name: string;
     card_number: number;
     rarity_id: number;
-    grade_id: number;
     expansion_set_id: number;
     rarity: Rarity;
-    grade: Grade;
     image: string
 };
 
@@ -46,7 +40,7 @@ export default function Index({ expansionSetId, expansionSetName, expansionSetSe
     const [selectedCard, setSelectedCard] = useState<Card | null>(null);
     return (
         <>
-            <Head title="Expansion Sets" />
+            <Head title="Cards" />
             {/* <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"> */}
             <h2 className="text-2xl font-bold p-4">{cards.length} cards found.</h2>
             <div className='inline-block p-4'>
@@ -157,16 +151,6 @@ export default function Index({ expansionSetId, expansionSetName, expansionSetSe
                                         </span>
                                     </div>
 
-                                    <div className="flex justify-between items-center">
-                                        <span className="font-semibold text-base-content/70">
-                                            Grade
-                                        </span>
-
-                                        <span>
-                                            {selectedCard.grade.name}
-                                        </span>
-                                    </div>
-
                                 </div>
 
                                 <div className="divider"></div>
@@ -205,24 +189,15 @@ export default function Index({ expansionSetId, expansionSetName, expansionSetSe
                                 </div> */}
 
                                 {/* Buttons */}
-                                {/* <div className="modal-action mt-auto">
+                                <div className="modal-action mt-auto">
 
-                                    <button className="btn btn-primary">
-                                        Add to Trade
-                                    </button>
+                                    <Link className='btn btn-secondary'
+                                        href={EditCard(selectedCard.id)}>
+                                        Edit Card
+                                    </Link>
 
-                                    <button className="btn btn-secondary">
-                                        Edit
-                                    </button>
 
-                                    <button
-                                        className="btn"
-                                        onClick={() => setSelectedCard(null)}
-                                    >
-                                        Close
-                                    </button>
-
-                                </div> */}
+                                </div>
 
                             </div>
 
