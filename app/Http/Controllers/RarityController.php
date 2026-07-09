@@ -38,6 +38,6 @@ class RarityController extends Controller
             'code' => $validate['code'],
         ]);
 
-        return redirect()->route('rarity.index');
+        return redirect()->route('rarity.index')->with('success','Rarity updated Successfuly!');
     }
 }

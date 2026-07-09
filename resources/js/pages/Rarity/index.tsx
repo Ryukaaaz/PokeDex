@@ -1,6 +1,6 @@
-import { Head, Link, useForm } from '@inertiajs/react';
-import React, { useState } from 'react';
-import rarity, { index as RarityIndex } from '@/routes/rarity'
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
+import React, { useEffect, useState } from 'react';
+import { index as RarityIndex } from '@/routes/rarity'
 import { update as UpdateRarity } from '@/routes/rarity'
 import FormInput from '@/components/form/FormInput';
 Index.layout = {
@@ -22,8 +22,29 @@ type Props = {
     rarities: Rarity[];
 }
 
+type pageProps = {
+    flash: {
+        success?: string;
+        error?: string;
+    }
+}
+
 export default function Index({ rarities }: Props) {
     const [selectedRarity, setSelectedRarity] = useState<Rarity | null>(null);
+    const { flash } = usePage<pageProps>().props;
+    const [showSuccess, setShowSuccess] = useState(!!flash.success);
+
+    useEffect(() => {
+        if (!flash.success) return;
+
+        setShowSuccess(true);
+
+        const timer = setTimeout(() => {
+            setShowSuccess(false);
+        }, 3000)
+
+        return () => clearTimeout(timer);
+    }, [flash.success])
 
     const form = useForm({
         id: 0,
@@ -59,6 +80,17 @@ export default function Index({ rarities }: Props) {
         <>
             <Head title="Rarity pages" />
             <div className="overflow-x-auto p-4">
+                {/* ALERT */}
+                {
+                    showSuccess && (
+                        <div role="alert" className="alert alert-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{flash.success}</span>
+                        </div>
+                    )
+                }
                 <h1>List Of Rarity</h1>
                 <Link href='#' className='btn btn-primary mt-4 mb-4'>
                     + Create New Rarity
