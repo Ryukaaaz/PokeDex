@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { LayoutGrid } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
@@ -14,12 +14,21 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
-import {index as ExpansionIndex } from '@/routes/expansion'
-import {index as RarityIndex } from '@/routes/rarity'
-import {index as GradeIndex } from '@/routes/grade'
+import { index as ExpansionIndex } from '@/routes/expansion'
+import { index as RarityIndex } from '@/routes/rarity'
+import { index as GradeIndex } from '@/routes/grade'
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
+    {
+        title: 'Dashboard',
+        href: dashboard(),
+        icon: LayoutGrid,
+    },
+
+];
+
+const adminNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: dashboard(),
@@ -42,6 +51,8 @@ const mainNavItems: NavItem[] = [
     },
 ];
 
+
+
 const footerNavItems: NavItem[] = [
     // {
     //     title: 'Repository',
@@ -56,6 +67,9 @@ const footerNavItems: NavItem[] = [
 ];
 
 export function AppSidebar() {
+    const { auth } = usePage().props as any;
+    const isAdmin = auth?.user?.role === 'admin';
+    const isStaff = auth?.user?.role === 'staff';
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
@@ -71,7 +85,13 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                {isStaff && (
+                    <NavMain items={mainNavItems} />
+                )}
+
+                {isAdmin && (
+                    <NavMain items={adminNavItems} />
+                )}
             </SidebarContent>
 
             <SidebarFooter>
