@@ -30,11 +30,6 @@ const mainNavItems: NavItem[] = [
 
 const adminNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-    {
         title: 'Cards',
         href: ExpansionIndex(),
         icon: LayoutGrid,
@@ -69,7 +64,7 @@ const footerNavItems: NavItem[] = [
 export function AppSidebar() {
     const { auth } = usePage().props as any;
     const isAdmin = auth?.user?.role === 'admin';
-    const isStaff = auth?.user?.role === 'staff';
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
@@ -85,12 +80,14 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                {isStaff && (
-                    <NavMain items={mainNavItems} />
-                )}
+                <NavMain 
+                items={mainNavItems}
+                label='Staff' />
 
                 {isAdmin && (
-                    <NavMain items={adminNavItems} />
+                    <NavMain
+                    items={adminNavItems} 
+                    label='Admin exclusive'/>
                 )}
             </SidebarContent>
 

@@ -42,7 +42,7 @@ export default function Index({ expansionSetId, expansionSetName, expansionSetSe
         <>
             <Head title="Cards" />
             {/* <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"> */}
-            <h2 className="text-2xl font-bold p-4">{cards.length} cards found.</h2>
+            <h2 className="text-2xl font-bold p-4">{cards.length} Cards Found In {expansionSetName} Expansion Pack</h2>
             <div className='inline-block p-4'>
                 <Link className='btn btn-soft btn-info'
                     href={createNewCard(expansionSetId)}>

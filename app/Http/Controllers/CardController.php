@@ -40,8 +40,12 @@ class CardController extends Controller
     {
         $rarity = Rarity::all();
 
+        $expansionSetName = ExpansionSet::findOrFail($expansionSetId)->name;
+        // @dd($expansionSetName);
+
         return Inertia::render('Card/create', [
             'expansion_set_id' => $expansionSetId,
+            'expansion_set_name' => $expansionSetName,
             'rarities' => $rarity,
         ]);
     }
@@ -106,15 +110,17 @@ class CardController extends Controller
         $rarity = Rarity::all();
 
         $expansionSetId = $card->expansion_set_id;
+        $expansionSetName = ExpansionSet::findOrFail($expansionSetId)->name;
         // @dd($expansionSetName,$expansionSetSeries);
 
 
         //get the selected card data to show.
         return Inertia::render('Card/update', [
             'card' => $card,
+            'expansionSetId' => $expansionSetId,
+            'expansionSetName' => $expansionSetName,
             //dropdown purposes
             'rarities' => $rarity,
-            'expansionSetId' => $expansionSetId,
         ]);
     }
 

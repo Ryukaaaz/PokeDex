@@ -30,7 +30,7 @@ type Rarity = {
 type Props = {
     card: Card;
     expansionSetId: number;
-
+    expansionSetName: string;
     rarities: Rarity[];
 }
 
@@ -38,6 +38,7 @@ type Props = {
 export default function Index({
     card,
     expansionSetId,
+    expansionSetName,
     rarities,
 
 }: Props) {
@@ -66,6 +67,7 @@ export default function Index({
         <>
             <Head title="Edit New Card" />
             <form onSubmit={submit} className='max-w-full space-y-4 p-4'>
+                <h2 className="text-2xl font-bold p-4">Editing Card In {expansionSetName} expansion pack</h2>
                 <div className='flex flex-col md:flex-row gap-4'>
                     <div className='flex-1 border'>
                         <figure className="w-full h-72 rounded-2xl bg-base-200 flex items-center justify-center overflow-hidden">
