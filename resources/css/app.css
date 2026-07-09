@@ -148,3 +148,22 @@
             linear-gradient(135deg, color-mix(in srgb, var(--background) 92%, white), var(--background));
     }
 }
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.animate-fade-out {
+    animation: fadeOut 3s forwards;
+}
