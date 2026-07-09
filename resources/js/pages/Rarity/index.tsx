@@ -1,4 +1,4 @@
-import { Head, Link, useForm, usePage } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import React, { useState } from 'react';
 import { index as RarityIndex } from '@/routes/rarity'
 import { update as UpdateRarity } from '@/routes/rarity'
