@@ -5,7 +5,6 @@ import { create as GradeCreate } from '@/routes/grade';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import FormInput from '@/components/form/FormInput';
-import { create } from '@/routes/cards';
 
 Index.layout = {
     breadcrumbs: [
