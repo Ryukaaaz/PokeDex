@@ -34,6 +34,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         //rarity routes
         Route::get('/rarity', [RarityController::class, 'index'])->name('rarity.index');
+        //create rarity
+        Route::post('/rarity/create',[RarityController::class,'create'])->name('rarity.create');
         //update rarity
         Route::patch('/rarity/update/{rarityId}',[RarityController::class,'patch'])->name('rarity.update');
 

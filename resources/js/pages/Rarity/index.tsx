@@ -2,6 +2,7 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import React, { useState } from 'react';
 import { index as RarityIndex } from '@/routes/rarity'
 import { update as UpdateRarity } from '@/routes/rarity'
+import { create as CreateRarity } from '@/routes/rarity'
 import FormInput from '@/components/form/FormInput';
 import { toast } from 'sonner';
 Index.layout = {
@@ -26,9 +27,15 @@ type Props = {
 
 export default function Index({ rarities }: Props) {
     const [selectedRarity, setSelectedRarity] = useState<Rarity | null>(null);
+    const [showCreateModal, setShowCreateModal] = useState(false);
 
     const form = useForm({
         id: 0,
+        code: '',
+        name: '',
+    })
+
+    const createForm = useForm({
         code: '',
         name: '',
     })
@@ -59,14 +66,29 @@ export default function Index({ rarities }: Props) {
         });
     }
 
+    function create(e: React.SyntheticEvent<HTMLFormElement>){
+        e.preventDefault();
+
+        if(createForm.processing) return;
+
+        createForm.post(CreateRarity().url,{
+            onSuccess:()=>{
+                setShowCreateModal(false);
+                createForm.reset();
+
+                toast.success('New Rarity Created Successfully ! ');
+            }
+        });
+    }
+
     return (
         <>
             <Head title="Rarity pages" />
             <div className="overflow-x-auto p-4">
                 <h1>List Of Rarity</h1>
-                <Link href='#' className='btn btn-primary mt-4 mb-4'>
+                <button className='btn btn-primary mt-4 mb-4' onClick={() => setShowCreateModal(true)}>
                     + Create New Rarity
-                </Link>
+                </button>
                 <table className="table">
                     <thead>
                         <tr>
@@ -95,7 +117,7 @@ export default function Index({ rarities }: Props) {
 
                     </tbody>
                 </table>
-                {/* Modal */}
+                {/* Edit Modal */}
                 {selectedRarity && (
 
                     <dialog className='modal modal-open'>
@@ -147,6 +169,58 @@ export default function Index({ rarities }: Props) {
                         </form>
                     </dialog>
                 )}
+                {/* Create Modal */}
+                {showCreateModal && (
+                    <dialog className='modal modal-open'>
+                        <div className='modal-box max-w-5xl p-0 overflow-hidden'>
+                            <div className='p-8 flex flex-col'>
+                                <div className='flex justify-between items-center'>
+                                    <h1>
+                                        Create New Rarity
+                                    </h1>
+                                </div>
+                                <form onSubmit={create} className='max-w-full space-y-4 p-4'>
+                                    <FormInput
+                                        label='Rarity code'
+                                        type='text'
+                                        value={createForm.data.code}
+                                        onChange={(e) =>
+                                            createForm.setData("code", e.target.value)
+                                        }
+                                        error={createForm.errors.code}
+                                    />
+                                    <FormInput
+                                        label='Rarity Name'
+                                        type='text'
+                                        value={createForm.data.name}
+                                        onChange={(e) =>
+                                            createForm.setData("name", e.target.value)
+                                        }
+                                        error={createForm.errors.name}
+                                    />
+                                    <button
+                                        type='submit'
+                                        className='btn btn-primary'
+                                        disabled={createForm.processing}>
+                                        {createForm.processing && (
+                                            <span className='loading loading-spinner loading-sm'></span>
+                                        )}
+                                        {createForm.processing ? "Saving..." : "Create"}
+                                    </button>
+
+
+                                </form>
+                            </div>
+                        </div>
+
+                        <form method='dialog' className='modal-backdrop'>
+                            <button onClick={() => setShowCreateModal(false)}>
+                                close
+                            </button>
+                        </form>
+                    </dialog>
+                )}
+
             </div>
 
         </>

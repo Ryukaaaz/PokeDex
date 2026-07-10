@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Rarity;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,6 +20,26 @@ class RarityController extends Controller
         return Inertia::render('Rarity/index', [
             'rarities' => $rarities,
         ]);
+    }
+
+    public function create(Request $request): RedirectResponse{
+
+        // @dd($request);
+        //validate
+        $validate = $request->validate([
+            'code' => ['required','string','min:1','max:255',Rule::unique('rarities','code')],
+            'name' => ['required','string','min:5','max:255'],
+        ]);
+
+        // @dd($validate['code'],$validate['name']);
+
+        //store
+        Rarity::create([
+            'code' => $validate['code'],
+            'name' => $validate['name'],
+        ]);
+        //return
+        return redirect()->route('rarity.index');
     }
 
     public function patch(Request $request, int $rarityId): RedirectResponse
