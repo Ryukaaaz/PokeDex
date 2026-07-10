@@ -5,7 +5,7 @@ import FormSelect from '@/components/form/FormSelect';
 Index.layout = {
     breadcrumbs: [
         {
-            title: 'Expansion Sets',
+            title: 'Cards',
             href: '/expansion-sets',
         },
     ],
@@ -67,17 +67,12 @@ export default function Index({
             series: filters.data.series ?? '',
             name: filters.data.name ?? '',
         });
-
-        //shorter way
-        // router.get('/expansion-sets',filters.data);
     }
     return (
         <>
             <Head title="Cards" />
 
             <h2 className="text-2xl font-bold p-4">{expansionSets.length} expansion sets found.</h2>
-
-
 
             {/* Search bar */}
             <div className='p-4'>

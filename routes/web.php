@@ -21,6 +21,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         //expansion set routes
         Route::get('/expansion-sets', [ExpansionSetController::class, 'index'])->name('expansion.index');
 
+        //admin expansion
+        Route::get('/admin-expansion',[ExpansionSetController::class,'admin_index'])->name('admin_expansion.index');
+        //admin expansion create
+        Route::post('/admin-expansion/create',[ExpansionSetController::class,'admin_create'])->name('admin_expansion.create');
+        //admin expansion update
+        Route::patch('/admin-expansion/update/{expansionId}',[ExpansionSetController::class,'admin_patch'])->name('admin_expansion.update');
+        //admin expansion delete
+        Route::delete('/admin-expansion/delete/{expansionId}',[ExpansionSetController::class,'admin_delete'])->name('admin_expansion.delete');
 
         //cards routes
         Route::get('/cards/show/{expansionSetId}', [CardController::class, 'index'])->name('cards.index')->whereNumber('expansionSetId');

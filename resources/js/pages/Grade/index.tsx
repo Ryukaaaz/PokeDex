@@ -108,93 +108,92 @@ export default function Index({ grades }: Props) {
                         })}
                     </tbody>
                 </table>
-                {/* edit modal */}
-                {selectedGrade && (
-                    <dialog className='modal modal-open'>
-                        <div className='modal-box max-w-5xl p-0 overflow-hidden'>
-                            <div className='p-8 flex flex-col'>
-                                <div className='flex justify-between items-center'>
-                                    <h1>
-                                        Edit Grade
-                                    </h1>
-                                </div>
-                                <form onSubmit={submitEdit} className='max-w-full space-y-4 p-4'>
-                                    <FormInput
-                                        label='Grade Name'
-                                        type='text'
-                                        value={editForm.data.name}
-                                        onChange={(e) =>
-                                            editForm.setData("name", e.target.value)
-                                        }
-                                        error={editForm.errors.name}
-                                    />
-                                    <button
-                                        type='submit'
-                                        className='btn btn-primary'
-                                        disabled={editForm.processing}>
-                                        {editForm.processing && (
-                                            <span className='loading loading-spinner loading-sm'></span>
-                                        )}
-                                        {editForm.processing ? "Saving..." : "Update"}
-                                    </button>
-
-
-                                </form>
-                            </div>
-                        </div>
-
-                        <form method='dialog' className='modal-backdrop'>
-                            <button onClick={() => setSelectedGrade(null)}>
-                                close
-                            </button>
-                        </form>
-                    </dialog>
-                )}
-
-                {/* create modal */}
-                {showCreateForm && (
-                    <dialog className='modal modal-open'>
-                        <div className='modal-box max-w-5xl p-0 overflow-hidden'>
-                            <div className='p-8 flex flex-col'>
-                                <div className='flex justify-between items-center'>
-                                    <h1>
-                                        Create Grade
-                                    </h1>
-                                </div>
-                                <form onSubmit={submitCreate} className='max-w-full space-y-4 p-4'>
-                                    <FormInput
-                                        label='Grade Name'
-                                        type='text'
-                                        value={createForm.data.name}
-                                        onChange={(e) =>
-                                            createForm.setData("name", e.target.value)
-                                        }
-                                        error={createForm.errors.name}
-                                    />
-                                    <button
-                                        type='submit'
-                                        className='btn btn-primary'
-                                        disabled={createForm.processing}>
-                                        {createForm.processing && (
-                                            <span className='loading loading-spinner loading-sm'></span>
-                                        )}
-                                        {createForm.processing ? "Saving..." : "Create"}
-                                    </button>
-
-
-                                </form>
-                            </div>
-                        </div>
-
-                        <form method='dialog' className='modal-backdrop'>
-                            <button onClick={() => setSelectedGrade(null)}>
-                                close
-                            </button>
-                        </form>
-                    </dialog>
-                )}
             </div >
+            {/* edit modal */}
+            {selectedGrade && (
+                <dialog className='modal modal-open'>
+                    <div className='modal-box max-w-5xl p-0 overflow-hidden'>
+                        <div className='p-8 flex flex-col'>
+                            <div className='flex justify-between items-center'>
+                                <h1>
+                                    Edit Grade
+                                </h1>
+                            </div>
+                            <form onSubmit={submitEdit} className='max-w-full space-y-4 p-4'>
+                                <FormInput
+                                    label='Grade Name'
+                                    type='text'
+                                    value={editForm.data.name}
+                                    onChange={(e) =>
+                                        editForm.setData("name", e.target.value)
+                                    }
+                                    error={editForm.errors.name}
+                                />
+                                <button
+                                    type='submit'
+                                    className='btn btn-primary'
+                                    disabled={editForm.processing}>
+                                    {editForm.processing && (
+                                        <span className='loading loading-spinner loading-sm'></span>
+                                    )}
+                                    {editForm.processing ? "Saving..." : "Update"}
+                                </button>
 
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <form method='dialog' className='modal-backdrop'>
+                        <button onClick={() => setSelectedGrade(null)}>
+                            close
+                        </button>
+                    </form>
+                </dialog>
+            )}
+
+            {/* create modal */}
+            {showCreateForm && (
+                <dialog className='modal modal-open'>
+                    <div className='modal-box max-w-5xl p-0 overflow-hidden'>
+                        <div className='p-8 flex flex-col'>
+                            <div className='flex justify-between items-center'>
+                                <h1>
+                                    Create Grade
+                                </h1>
+                            </div>
+                            <form onSubmit={submitCreate} className='max-w-full space-y-4 p-4'>
+                                <FormInput
+                                    label='Grade Name'
+                                    type='text'
+                                    value={createForm.data.name}
+                                    onChange={(e) =>
+                                        createForm.setData("name", e.target.value)
+                                    }
+                                    error={createForm.errors.name}
+                                />
+                                <button
+                                    type='submit'
+                                    className='btn btn-primary'
+                                    disabled={createForm.processing}>
+                                    {createForm.processing && (
+                                        <span className='loading loading-spinner loading-sm'></span>
+                                    )}
+                                    {createForm.processing ? "Saving..." : "Create"}
+                                </button>
+
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <form method='dialog' className='modal-backdrop'>
+                        <button onClick={() => setSelectedGrade(null)}>
+                            close
+                        </button>
+                    </form>
+                </dialog>
+            )}
         </>
     );
 }
