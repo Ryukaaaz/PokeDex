@@ -41,6 +41,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         //grade routes
         Route::get('/grade', [GradeController::class, 'index'])->name('grade.index');
+        //create grade
+        Route::post('/grade/create',[GradeController::class,'store'])->name('grade.create');
+        // update grade
+        Route::patch('/grade/update/{gradeId}',[GradeController::class,'patch'])->name('grade.update');
     });
 });
 

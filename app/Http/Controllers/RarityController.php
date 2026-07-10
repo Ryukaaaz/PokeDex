@@ -48,7 +48,7 @@ class RarityController extends Controller
         //validate
         // @dd($request->code, $request->name);
         $validate = $request->validate([
-            'name' => ['required','string','min:5','max:255'],
+            'name' => ['required','string','min:5','max:255',Rule::unique('rarities','code')],
             'code' => ['required','string','min:1','max:6'],
         ]);
         
