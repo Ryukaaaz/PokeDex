@@ -42,7 +42,7 @@ class Card extends Model
     }
 
     /**
-     * @return HasMany<Inventory, Card>
+     * @return HasMany<Inventory, $this>
      */
     public function inventories(): HasMany
     {
