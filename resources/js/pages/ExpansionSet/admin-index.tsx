@@ -195,6 +195,7 @@ export default function Index({
                     <thead>
                         <tr>
                             <th>Id</th>
+                            <th>Language</th>
                             <th>Code</th>
                             <th>Series</th>
                             <th>Name</th>
@@ -207,6 +208,7 @@ export default function Index({
                             return (
                                 <tr key={expansion.id} className='hover:bg-base-300'>
                                     <th>{expansion.id}</th>
+                                    <th>{expansion.language}</th>
                                     <th>{expansion.code}</th>
                                     <th>{expansion.series}</th>
                                     <th>{expansion.name}</th>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Card extends Model
 {
@@ -38,5 +39,13 @@ class Card extends Model
     public function grade(): BelongsTo
     {
         return $this->belongsTo(Grade::class);
+    }
+
+    /**
+     * @return HasMany<Inventory, Card>
+     */
+    public function inventories(): HasMany
+    {
+        return $this->hasMany(Inventory::class);
     }
 }

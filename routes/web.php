@@ -5,6 +5,7 @@ use App\Http\Controllers\ExpansionSetController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\RarityController;
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\InventoryController;
 
 Route::inertia('/', 'welcome')->name('home');
 
@@ -14,6 +15,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia\Inertia::render('dashboard/index');
     })->name('dashboard');
 
+    //inventory
+    Route::get('/inventory', [InventoryController::class,'index'])->name('inventory.index');
 
 
     //admin

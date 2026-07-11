@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\Master\ExpansionSetSeeder;
 use Database\Seeders\Master\CardSeeder;
 use Database\Seeders\Master\GradeSeeder;
+use Database\Seeders\Master\InventorySeeder;
 use Database\Seeders\Master\RaritySeeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
             GradeSeeder::class,
             RaritySeeder::class,
             CardSeeder::class,
+            InventorySeeder::class,
         ]);
     }
 }

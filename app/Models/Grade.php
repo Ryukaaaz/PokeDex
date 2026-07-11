@@ -19,4 +19,12 @@ class Grade extends Model
     {
         return $this->hasMany(Card::class);
     }
+
+    /**
+     * @return HasMany<Inventory, $this>
+     */
+
+    public function inventories(): HasMany{
+        return $this->hasMany(Inventory::class);
+    }
 }
