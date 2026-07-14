@@ -61,21 +61,20 @@ class PurchaseController extends Controller
             //store to purchase_items table
             foreach ($validated['items'] as $item) {
                 $purchase->purchase_items()->create($item);
-            }
-
-            //increase the stock at inventory table if not found then create new
-            $inventory = Inventory::firstOrCreate(
-                [
-                    'card_id' => $item['card_id'],
-                    'grade_id' => $item['grade_id'],
-                ],
-                [
-                    'quantity' => 0,
-                    'asking_price'=> ceil($item['unit_cost']+ ($item['unit_cost']*0.30)),
-                ],
-            );
-             //increase the inventory quantity based on the card_id and grade_id
+                //increase the stock at inventory table if not found then create new
+                $inventory = Inventory::firstOrCreate(
+                    [
+                        'card_id' => $item['card_id'],
+                        'grade_id' => $item['grade_id'],
+                    ],
+                    [
+                        'quantity' => 0,
+                        'asking_price' => ceil($item['unit_cost'] + ($item['unit_cost'] * 0.30)),
+                    ],
+                );
+                //increase the inventory quantity based on the card_id and grade_id
                 $inventory->increment('quantity', $item['quantity']);
+            }
         });
 
         // dd($request);
