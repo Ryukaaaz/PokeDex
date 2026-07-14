@@ -19,6 +19,7 @@ type Inventory = {
     card_name: string,
     expansion_set_name: string,
     grade_name: string,
+    asking_price: number,
 }
 
 type allInventory = {
@@ -117,6 +118,7 @@ export default function Index({
                             <th>Card Number</th>
                             <th>Grade</th>
                             <th>Quantity</th>
+                            <th>Listing Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -129,6 +131,12 @@ export default function Index({
                                     <th>{inventory.card_number}</th>
                                     <th>{inventory.grade_name}</th>
                                     <th>{inventory.quantity}</th>
+                                    <th>
+                                        {(inventory.asking_price ?? 0).toLocaleString('id-ID',{
+                                            style: 'currency',
+                                            currency: 'IDR',
+                                        })}
+                                    </th>
                                 </tr>
                             )
                         })}

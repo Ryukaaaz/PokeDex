@@ -19,6 +19,7 @@ import { index as AdminExpansionIndex } from '@/routes/admin_expansion'
 import { index as RarityIndex } from '@/routes/rarity'
 import { index as GradeIndex } from '@/routes/grade'
 import { index as InventoryIndex } from '@/routes/inventory';
+import { index as PurchaseIndex } from '@/routes/purchase';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -30,6 +31,11 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Inventory',
         href: InventoryIndex(),
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Purchase',
+        href: PurchaseIndex(),
         icon: LayoutGrid,
     },
 

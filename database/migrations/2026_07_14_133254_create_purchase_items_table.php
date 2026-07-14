@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventories', function (Blueprint $table) {
+        Schema::create('purchase_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('purchase_id')->constrained()->cascadeOnDelete();
             $table->foreignId('card_id')->constrained()->cascadeOnDelete();
             $table->foreignId('grade_id')->constrained()->cascadeOnDelete();
+            $table->unsignedInteger('unit_cost');
             $table->unsignedInteger('quantity');
-            //for listing price to sell 
-            $table->unsignedInteger('asking_price')->nullable();
             $table->timestamps();
-
-            //rule
-            $table->unique(['card_id', 'grade_id']);
         });
     }
 
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventories');
+        Schema::dropIfExists('purchase_items');
     }
 };

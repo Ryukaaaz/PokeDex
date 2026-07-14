@@ -3,10 +3,12 @@ import { index as adminIndex } from '@/routes/admin_expansion'
 import { update as UpdateAdminIndex } from '@/routes/admin_expansion'
 import { create as CreateAdminIndex } from '@/routes/admin_expansion';
 import { deleteMethod as DeleteAdminIndex } from '@/routes/admin_expansion';
+import FormInput from '@/components/form/FormInput';
 import FormSelect from '@/components/form/FormSelect';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
-import FormInput from '@/components/form/FormInput';
+import { Expansion } from '@/types/admin_expansion';
+import EditModal from './components/admin-editModal';
 
 Index.layout = {
     breadcrumbs: [
@@ -17,17 +19,6 @@ Index.layout = {
     ],
 };
 
-type Expansion = {
-    id: number;
-    name: string;
-    code: string;
-    series: string;
-    release_date: string;
-    language: string;
-    total: number;
-    printed_total: number;
-};
-
 type Props = {
     expansionSets: Expansion[];
     allExpansionSets: Expansion[];
@@ -36,8 +27,6 @@ type Props = {
         name: string;
     }
 }
-
-
 
 export default function Index({
     expansionSets,
@@ -126,7 +115,6 @@ export default function Index({
             }
         })
     }
-
 
     //filtered the series options
     const seriesOptions = [
@@ -232,98 +220,12 @@ export default function Index({
                 </table>
             </div >
             {/* Edit Modal */}
-            {selectedExpansion && (
-                <dialog className="modal modal-open">
-                    <div className="modal-box max-w-5xl p-0 overflow-y-auto">
-                        <div className="grid md:grid-cols-2">
-
-                            {/* Left Side */}
-                            <div className="bg-base-200 flex items-center justify-center p-8">
-
-                                <figure className="w-full h-72 rounded-2xl bg-base-200 flex items-center justify-center overflow-hidden">
-                                    <img
-                                        src={`/storage/${selectedExpansion.name}`}
-                                        alt={selectedExpansion.name}
-                                        className='w-full h-full object-contain'
-                                        onError={(e) => {
-                                            e.currentTarget.src =
-                                                "https://img.daisyui.com/images/stock/card-1.webp?x";
-                                        }}
-                                    />
-                                </figure>
-
-                            </div>
-
-                            {/* Right Side */}
-                            <div className="p-8 flex flex-col">
-                                <div className='flex justify-between items-center'>
-                                    <h1>
-                                        Edit Expansion
-                                    </h1>
-                                </div>
-                                <div className="divider"></div>
-                                {/* Information */}
-                                <form onSubmit={submitEdit} className='max-w-full space-y-4 p-4'>
-                                    <FormInput
-                                        label='Expansion Code'
-                                        type='text'
-                                        value={editForm.data.code}
-                                        onChange={(e) =>
-                                            editForm.setData("code", e.target.value)
-                                        }
-                                        error={editForm.errors.code}
-                                    />
-                                    <FormInput
-                                        label='Expansion Series'
-                                        type='text'
-                                        value={editForm.data.series}
-                                        onChange={(e) =>
-                                            editForm.setData("series", e.target.value)
-                                        }
-                                        error={editForm.errors.series}
-                                    />
-                                    <FormInput
-                                        label='Expansion name'
-                                        type='text'
-                                        value={editForm.data.name}
-                                        onChange={(e) =>
-                                            editForm.setData("name", e.target.value)
-                                        }
-                                        error={editForm.errors.name}
-                                    />
-                                    <FormInput
-                                        label='Release Date'
-                                        type='date'
-                                        value={editForm.data.release_date}
-                                        onChange={(e) =>
-                                            editForm.setData("release_date", e.target.value)
-                                        }
-                                        error={editForm.errors.release_date}
-                                    />
-
-                                    <div className="divider"></div>
-                                    <button
-                                        type='submit'
-                                        className='btn btn-primary'
-                                        disabled={editForm.processing}>
-                                        {editForm.processing && (
-                                            <span className='loading loading-spinner loading-sm'></span>
-                                        )}
-                                        {editForm.processing ? "Saving... " : "Update"}
-
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <form method="dialog" className="modal-backdrop">
-                        <button onClick={() => setSelectedExpansion(null)}>
-                            close
-                        </button>
-                    </form>
-                </dialog>
-            )}
+            <EditModal
+                selectedExpansion={selectedExpansion}
+                editForm={editForm}
+                submitEdit={submitEdit}
+                onClose={()=>setSelectedExpansion(null)}
+            />
             {/* Create Modal */}
             {showCreateModal && (
                 <dialog className="modal modal-open">

@@ -6,6 +6,7 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\RarityController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\PurchaseController;
 
 Route::inertia('/', 'welcome')->name('home');
 
@@ -18,6 +19,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //inventory
     Route::get('/inventory', [InventoryController::class,'index'])->name('inventory.index');
 
+    //purchase
+    Route::get('/purchase',[PurchaseController::class,'index'])->name('purchase.index');
+    //purchase create
+    Route::get('/purchase/create',[PurchaseController::class,'show'])->name('purchase.create');
+    Route::post('/purchase/create',[PurchaseController::class,'store'])->name('purchase.store');
 
     //admin
     Route::middleware('admin')->group(function () {
