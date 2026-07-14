@@ -1,7 +1,6 @@
-import { Head, router, useForm } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { index as PurchaseIndex } from '@/routes/purchase';
 import { create as PurchaseCreate } from '@/routes/purchase';
-import React from 'react';
 index.layout = {
     breadcrumbs: [
         {
