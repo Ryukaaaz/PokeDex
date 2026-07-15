@@ -6,6 +6,7 @@ use App\Models\Card;
 use App\Models\Grade;
 use App\Models\Inventory;
 use App\Models\Purchase;
+use App\Models\Purchase_item;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,12 +23,12 @@ class PurchaseController extends Controller
             'purchase_items.card',
             'purchase_items.grade'
         )->get();
-        $purchases = $purchases->map(function ($purchase) {
+        $purchases = $purchases->map(function (Purchase $purchase) {
             return [
                 'id' => $purchase->id,
                 'purchase_date' => $purchase->purchase_date,
                 'notes' => $purchase->notes,
-                'items' => $purchase->purchase_items->map(function ($item) {
+                'items' => $purchase->purchase_items->map(function (Purchase_item $item) {
                     return [
                         'purchase_id' => $item->purchase_id,
                         'card' => [
