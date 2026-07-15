@@ -1,6 +1,6 @@
 import { Head, Link, router, useForm } from '@inertiajs/react';
-import { index as cardIndex } from '@/routes/cards'
 import FormSelect from '@/components/form/FormSelect';
+import { index as cardIndex } from '@/routes/cards'
 
 Index.layout = {
     breadcrumbs: [
@@ -53,7 +53,10 @@ export default function Index({
 
     //filtered name options upon series change
     const filteredNameOPtions = allExpansionSets.filter((expansion) => {
-        if (!filters.data.series) return true;
+        if (!filters.data.series) {
+return true;
+}
+
         return expansion.series === filters.data.series;
     }).map((expansion) => ({
         value: expansion.name,
@@ -68,6 +71,7 @@ export default function Index({
             name: filters.data.name ?? '',
         });
     }
+
     return (
         <>
             <Head title="Cards" />

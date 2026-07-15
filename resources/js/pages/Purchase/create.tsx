@@ -1,11 +1,11 @@
 import { Head, useForm } from '@inertiajs/react';
-import { create as PurchaseCreate } from '@/routes/purchase';
-import { store as PurchaseStore } from '@/routes/purchase';
+import { useState } from 'react';
 import FormInput from '@/components/form/FormInput';
 import FormSelect from '@/components/form/FormSelect';
-import { useState } from 'react';
+import { create as PurchaseCreate } from '@/routes/purchase';
+import { store as PurchaseStore } from '@/routes/purchase';
 import CardPickerModal from './components/CardPickerModal';
-index.layout = {
+Create.layout = {
     breadcrumbs: [
         {
             title: 'Create New Purchase',
@@ -35,7 +35,7 @@ type Props = {
     cards: Card[];
 }
 
-export default function index({
+function Create ({
     grade,
     cards
 
@@ -61,7 +61,10 @@ export default function index({
 
     function submitForm(e: React.SyntheticEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (createForm.processing) return;
+
+        if (createForm.processing) {
+return;
+}
 
         createForm.post(PurchaseStore().url);
     }
@@ -237,4 +240,4 @@ export default function index({
     );
 }
 
-
+export default Create;

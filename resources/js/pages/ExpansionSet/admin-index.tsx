@@ -1,13 +1,13 @@
 import { Head, router, useForm } from '@inertiajs/react';
+import React, { useState } from 'react';
+import { toast } from 'sonner';
+import FormInput from '@/components/form/FormInput';
+import FormSelect from '@/components/form/FormSelect';
 import { index as adminIndex } from '@/routes/admin_expansion'
 import { update as UpdateAdminIndex } from '@/routes/admin_expansion'
 import { create as CreateAdminIndex } from '@/routes/admin_expansion';
 import { deleteMethod as DeleteAdminIndex } from '@/routes/admin_expansion';
-import FormInput from '@/components/form/FormInput';
-import FormSelect from '@/components/form/FormSelect';
-import React, { useState } from 'react';
-import { toast } from 'sonner';
-import { Expansion } from '@/types/admin_expansion';
+import type { Expansion } from '@/types/admin_expansion';
 import EditModal from './components/admin-editModal';
 
 Index.layout = {
@@ -73,7 +73,9 @@ export default function Index({
 
     //handle delete button
     const handleDelete = () => {
-        if (!showDeleteModal) return;
+        if (!showDeleteModal) {
+return;
+}
 
         router.delete(DeleteAdminIndex(showDeleteModal.id).url, {
             onSuccess: () => {
@@ -87,9 +89,13 @@ export default function Index({
     function submitEdit(e: React.SyntheticEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        if (editForm.processing) return;
+        if (editForm.processing) {
+return;
+}
 
-        if (!selectedExpansion) return;
+        if (!selectedExpansion) {
+return;
+}
 
         editForm.patch(UpdateAdminIndex(selectedExpansion.id).url, {
             onSuccess: () => {
@@ -104,7 +110,10 @@ export default function Index({
     //submit create
     function submitCreate(e: React.SyntheticEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (createForm.processing) return;
+
+        if (createForm.processing) {
+return;
+}
 
         createForm.post(CreateAdminIndex().url, {
             onSuccess: () => {
@@ -126,7 +135,10 @@ export default function Index({
 
     //filtered name options upon series change
     const filteredNameOPtions = allExpansionSets.filter((expansion) => {
-        if (!filters.data.series) return true;
+        if (!filters.data.series) {
+return true;
+}
+
         return expansion.series === filters.data.series;
     }).map((expansion) => ({
         value: expansion.name,
@@ -141,6 +153,7 @@ export default function Index({
             name: filters.data.name ?? '',
         });
     }
+
     return (
         <>
             <Head title="Admin Expansion" />

@@ -1,8 +1,8 @@
 import { useForm, Head } from '@inertiajs/react';
-import { edit as CardEdit } from '@/routes/cards';
-import { update as CardUpdate } from '@/routes/cards';
 import FormInput from '@/components/form/FormInput';
 import FormSelect from '@/components/form/FormSelect';
+import { edit as CardEdit } from '@/routes/cards';
+import { update as CardUpdate } from '@/routes/cards';
 Index.layout = {
     breadcrumbs: [
         {
@@ -53,7 +53,10 @@ export default function Index({
 
     function submit(e: React.SyntheticEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (form.processing) return;
+
+        if (form.processing) {
+return;
+}
 
         form.patch(CardUpdate(card.id).url);
     }

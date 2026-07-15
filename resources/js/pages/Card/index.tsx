@@ -38,6 +38,7 @@ type Props = {
 
 export default function Index({ expansionSetId, expansionSetName, expansionSetSeries, cards }: Props) {
     const [selectedCard, setSelectedCard] = useState<Card | null>(null);
+
     return (
         <>
             <Head title="Cards" />

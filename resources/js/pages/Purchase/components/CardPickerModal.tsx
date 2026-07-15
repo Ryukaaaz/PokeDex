@@ -33,7 +33,9 @@ export default function CardPickerModal({
         );
     }, [cards, search]);
 
-    if (!open) return null;
+    if (!open) {
+return null;
+}
 
     return (
         <dialog className="modal modal-open">

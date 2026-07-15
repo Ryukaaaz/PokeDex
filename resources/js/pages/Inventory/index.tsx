@@ -1,6 +1,6 @@
 import { Head, router, useForm } from "@inertiajs/react";
-import { index as InventoryIndex } from '@/routes/inventory'
 import FormSelect from "@/components/form/FormSelect";
+import { index as InventoryIndex } from '@/routes/inventory'
 Index.layout = {
     breadcrumbs: [
         {
@@ -66,7 +66,10 @@ export default function Index({
     }))
     //filtered card options
     const cardOptions = allInventories.filter((inventory) => {
-        if (!filters.data.expansion) return true;
+        if (!filters.data.expansion) {
+return true;
+}
+
         return inventory.expansion_set_name === filters.data.expansion;
     }).map((inventory) => ({
         value: inventory.card_name,

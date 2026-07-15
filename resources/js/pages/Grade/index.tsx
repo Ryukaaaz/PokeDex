@@ -1,10 +1,10 @@
 import { Head, useForm } from '@inertiajs/react';
-import { index as GradeIndex } from '@/routes/grade'
-import { update as GradeUpdate } from '@/routes/grade';
-import { create as GradeCreate } from '@/routes/grade';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import FormInput from '@/components/form/FormInput';
+import { index as GradeIndex } from '@/routes/grade'
+import { update as GradeUpdate } from '@/routes/grade';
+import { create as GradeCreate } from '@/routes/grade';
 
 Index.layout = {
     breadcrumbs: [
@@ -47,9 +47,14 @@ export default function Index({ grades }: Props) {
 
     function submitEdit(e: React.SyntheticEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (editForm.processing) return;
 
-        if (!selectedGrade) return;
+        if (editForm.processing) {
+return;
+}
+
+        if (!selectedGrade) {
+return;
+}
 
         editForm.patch(GradeUpdate(selectedGrade.id).url, {
             onSuccess: () => {
@@ -63,7 +68,10 @@ export default function Index({ grades }: Props) {
 
     function submitCreate(e: React.SyntheticEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (createForm.processing) return;
+
+        if (createForm.processing) {
+return;
+}
 
         createForm.post(GradeCreate().url, {
             onSuccess: () => {

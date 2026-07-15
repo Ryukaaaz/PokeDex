@@ -1,9 +1,9 @@
 import { useForm, Head } from '@inertiajs/react';
-import { create as CardCreate } from '@/routes/cards';
-import { store as CardStore } from '@/routes/cards';
+import { useState } from 'react';
 import FormInput from '@/components/form/FormInput';
 import FormSelect from '@/components/form/FormSelect';
-import { useState } from 'react';
+import { create as CardCreate } from '@/routes/cards';
+import { store as CardStore } from '@/routes/cards';
 Index.layout = {
     breadcrumbs: [
         {
@@ -43,19 +43,27 @@ export default function Index({
 
     function submit(e: React.SyntheticEvent<HTMLFormElement>) {
         e.preventDefault();
-        if(form.processing) return;
+
+        if(form.processing) {
+return;
+}
 
         form.post(CardStore().url);
     }
 
     function handleImageChange (e: React.ChangeEvent<HTMLInputElement>){
         const file = e.target.files?.[0];
-        if(!file)return;
+
+        if(!file){
+return;
+}
 
         if(file.size> 2* 1024*1024){
             alert("Image must be smaller than 2 MB.");
+
             return;
         }
+
         form.setData("image",file);
 
         setPreview(URL.createObjectURL(file));

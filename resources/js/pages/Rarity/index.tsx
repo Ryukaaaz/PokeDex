@@ -1,10 +1,10 @@
 import { Head, useForm } from '@inertiajs/react';
 import React, { useState } from 'react';
+import { toast } from 'sonner';
+import FormInput from '@/components/form/FormInput';
 import { index as RarityIndex } from '@/routes/rarity'
 import { update as UpdateRarity } from '@/routes/rarity'
 import { create as CreateRarity } from '@/routes/rarity'
-import FormInput from '@/components/form/FormInput';
-import { toast } from 'sonner';
 Index.layout = {
     breadcrumbs: [
         {
@@ -52,9 +52,14 @@ export default function Index({ rarities }: Props) {
 
     function submit(e: React.SyntheticEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (form.processing) return;
 
-        if (!selectedRarity) return;
+        if (form.processing) {
+return;
+}
+
+        if (!selectedRarity) {
+return;
+}
 
         form.patch(UpdateRarity(selectedRarity.id).url, {
             onSuccess: () => {
@@ -69,7 +74,9 @@ export default function Index({ rarities }: Props) {
     function create(e: React.SyntheticEvent<HTMLFormElement>){
         e.preventDefault();
 
-        if(createForm.processing) return;
+        if(createForm.processing) {
+return;
+}
 
         createForm.post(CreateRarity().url,{
             onSuccess:()=>{

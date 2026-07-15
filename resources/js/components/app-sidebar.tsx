@@ -14,12 +14,12 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
-import { index as ExpansionIndex } from '@/routes/expansion'
 import { index as AdminExpansionIndex } from '@/routes/admin_expansion'
-import { index as RarityIndex } from '@/routes/rarity'
+import { index as ExpansionIndex } from '@/routes/expansion'
 import { index as GradeIndex } from '@/routes/grade'
 import { index as InventoryIndex } from '@/routes/inventory';
 import { index as PurchaseIndex } from '@/routes/purchase';
+import { index as RarityIndex } from '@/routes/rarity'
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [

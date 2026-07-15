@@ -1,6 +1,6 @@
-import { InertiaFormProps, useForm } from "@inertiajs/react";
+import type { InertiaFormProps } from "@inertiajs/react";
 import FormInput from '@/components/form/FormInput';
-import { Expansion } from "@/types/admin_expansion";
+import type { Expansion } from "@/types/admin_expansion";
 
 type ExpansionForm = {
     id: number;
@@ -23,7 +23,9 @@ export default function EditModal({
     submitEdit,
     onClose,
 }: Props) {
-    if (!selectedExpansion) return null;
+    if (!selectedExpansion) {
+return null;
+}
 
     return (
         <dialog className="modal modal-open">
