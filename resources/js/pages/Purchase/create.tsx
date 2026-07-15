@@ -136,11 +136,18 @@ export default function index({
                                             <FormInput
                                                 label='Cost'
                                                 type='text'
-                                                value={createForm.data.items[index].unit_cost}
+                                                value={
+                                                    createForm.data.items[index].unit_cost
+                                                        ? new Intl.NumberFormat("id-ID").format(
+                                                            Number(createForm.data.items[index].unit_cost)
+                                                        )
+                                                        : ""
+                                                }
                                                 onChange={(e) => {
+                                                    const raw = e.target.value.replace(/\D/g, "");
                                                     const items = [...createForm.data.items];
 
-                                                    items[index].unit_cost = e.target.value;
+                                                    items[index].unit_cost = raw;
 
                                                     createForm.setData("items", items);
                                                 }}

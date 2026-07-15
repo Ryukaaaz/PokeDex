@@ -18,9 +18,36 @@ class PurchaseController extends Controller
     public function index(): Response
     {
         //get the data
-        $purchase = Purchase::with('purchase_items')->get();
+        $purchases = Purchase::with(
+            'purchase_items.card',
+            'purchase_items.grade'
+        )->get();
+        $purchases = $purchases->map(function ($purchase) {
+            return [
+                'id' => $purchase->id,
+                'purchase_date' => $purchase->purchase_date,
+                'notes' => $purchase->notes,
+                'items' => $purchase->purchase_items->map(function ($item) {
+                    return [
+                        'purchase_id' => $item->purchase_id,
+                        'card' => [
+                            'id' => $item->card->id,
+                            'name' => $item->card->name,
+                        ],
+                        'grade' => [
+                            'id' => $item->grade->id,
+                            'name' => $item->grade->name,
+                        ],
+                        'quantity' => $item->quantity,
+                        'unit_cost' => $item->unit_cost,
+                    ];
+                }),
+            ];
+        })->values();
+        // dd($purchases->first());
+
         return Inertia::render('Purchase/index', [
-            'purchase' => $purchase,
+            'purchases' => $purchases,
         ]);
     }
 
