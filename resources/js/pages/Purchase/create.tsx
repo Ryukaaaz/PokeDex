@@ -35,7 +35,7 @@ type Props = {
     cards: Card[];
 }
 
-function Create ({
+function Create({
     grade,
     cards
 
@@ -63,8 +63,8 @@ function Create ({
         e.preventDefault();
 
         if (createForm.processing) {
-return;
-}
+            return;
+        }
 
         createForm.post(PurchaseStore().url);
     }

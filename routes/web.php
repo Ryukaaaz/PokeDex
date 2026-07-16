@@ -7,6 +7,7 @@ use App\Http\Controllers\RarityController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SaleController;
 
 Route::inertia('/', 'welcome')->name('home');
 
@@ -24,6 +25,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //purchase create
     Route::get('/purchase/create',[PurchaseController::class,'show'])->name('purchase.create');
     Route::post('/purchase/create',[PurchaseController::class,'store'])->name('purchase.store');
+
+    //sale
+    Route::get('/sale',[SaleController::class,'index'])->name('sale.index');
+    //sale create
+    Route::get('/sale/create',[SaleController::class,'show'])->name('sale.create');
+    Route::post('/sale/create',[SaleController::class,'store'])->name('sale.store');
 
     //admin
     Route::middleware('admin')->group(function () {

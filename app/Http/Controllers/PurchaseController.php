@@ -43,8 +43,10 @@ class PurchaseController extends Controller
                         'unit_cost' => $item->unit_cost,
                     ];
                 }),
+                'total' => $purchase->purchase_items->map(fn(Purchase_item $item)=> $item->quantity * $item->unit_cost)->sum(),
             ];
-        })->values();
+        })->sortByDesc('id')
+        ->values();
         // dd($purchases->first());
 
         return Inertia::render('Purchase/index', [
@@ -54,7 +56,6 @@ class PurchaseController extends Controller
 
     public function show(): Response
     {
-
         //get the data
         $grade = Grade::all();
         $card = Card::with('expansionSet')->get();

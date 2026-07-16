@@ -1,16 +1,17 @@
-import { Head, router } from '@inertiajs/react';
-import { index as PurchaseIndex } from '@/routes/purchase';
-import { create as PurchaseCreate } from '@/routes/purchase';
+import { Head, router } from "@inertiajs/react";
+import { index as SaleIndex } from "@/routes/sale";
+import { create as SaleCreate } from "@/routes/sale";
+
 index.layout = {
     breadcrumbs: [
         {
-            title: 'Purchase',
-            href: PurchaseIndex(),
+            title: 'Sale',
+            href: SaleIndex(),
         },
     ],
 };
-type Purchase_items = {
-    purchase_id: number,
+type Sale_items = {
+    sale_id: number,
     card: {
         id: number,
         name: string,
@@ -20,43 +21,45 @@ type Purchase_items = {
         name: string,
     }
     quantity: number,
-    unit_cost: number,
+    discount: number,
+    unit_price: number,
 }
 
-type Purchase = {
+type Sale = {
     id: number,
-    purchase_date: string,
+    sale_date: string,
     notes: string | null,
-    items: Purchase_items[]
+    items: Sale_items[],
     total: number,
 }
 
 type Props = {
-    purchases: Purchase[];
+    sales: Sale[];
 }
 
 export default function index({
-    purchases
+    sales
 }: Props) {
     return (
         <>
-            <Head title="Purchase" />
+            <Head title="Sale" />
             <div className="overflow-x-auto p-4">
-                <h1 className='text text-xl bold'>Purchase History</h1>
-                <button className='btn btn-primary mt-4 mb-4' onClick={() => router.visit(PurchaseCreate().url)}>
-                    + Create New Purchase
+                <h1 className='text text-xl bold'>Sale History</h1>
+                <button className='btn btn-primary mt-4 mb-4' onClick={() => router.visit(SaleCreate().url)}>
+                    + Create New Sale
                 </button>
-                {purchases.map((purchase) => (
-                    <div key={purchase.id} className="card bg-base-100 shadow mb-6">
 
-                        {/* Purchase Header */}
+                {sales.map((sale) => (
+                    <div key={sale.id} className="card bg-base-100 shadow mb-6">
+
+                        {/* sale Header */}
                         <div className="card-body">
                             <h2 className="card-title">
-                                Purchase #{purchase.id}
+                                sale #{sale.id}
                             </h2>
 
-                            <p>Date: {purchase.purchase_date}</p>
-                            <p>Notes: {purchase.notes ?? "-"}</p>
+                            <p>Date: {sale.sale_date}</p>
+                            <p>Notes: {sale.notes ?? "-"}</p>
 
                             <div className="overflow-x-auto mt-4">
 
@@ -66,24 +69,26 @@ export default function index({
                                             <th>Card</th>
                                             <th>Grade</th>
                                             <th>Qty</th>
-                                            <th>Unit Cost</th>
+                                            <th>Discount</th>
+                                            <th>Unit Price</th>
                                             <th>Total</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
 
-                                        {purchase.items.map((item) => (
+                                        {sale.items.map((item) => (
                                             <tr key={`${item.card.id}-${item.grade.id}`}>
                                                 <td>{item.card.name}</td>
                                                 <td>{item.grade.name}</td>
                                                 <td>{item.quantity}</td>
-                                                <td>{(item.unit_cost ?? 0).toLocaleString('id-ID', {
+                                                <td>{item.discount}</td>
+                                                <td>{(item.unit_price ?? 0).toLocaleString('id-ID', {
                                                     style: 'currency',
                                                     currency: 'IDR',
 
                                                 })}</td>
-                                                <td>{(item.quantity * item.unit_cost).toLocaleString('id-ID', {
+                                                <td>{(item.quantity * item.unit_price).toLocaleString('id-ID', {
                                                     style: 'currency',
                                                     currency: 'IDR',
                                                 })}</td>
@@ -92,8 +97,8 @@ export default function index({
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colSpan={4} className='text-right font-bold'> Total :</td>
-                                            <td className='text-right font-bold'>{(purchase.total).toLocaleString('id-ID',{
+                                            <td colSpan={5} className='text-right font-bold'> Total :</td>
+                                            <td className='text-right font-bold'>{(sale.total).toLocaleString('id-ID', {
                                                 style: 'currency',
                                                 currency: 'IDR',
                                             })}</td>
@@ -109,7 +114,6 @@ export default function index({
                     </div>
                 ))}
             </div>
-
         </>
     );
 }

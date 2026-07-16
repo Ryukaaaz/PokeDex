@@ -20,6 +20,7 @@ import { index as GradeIndex } from '@/routes/grade'
 import { index as InventoryIndex } from '@/routes/inventory';
 import { index as PurchaseIndex } from '@/routes/purchase';
 import { index as RarityIndex } from '@/routes/rarity'
+import { index as SaleIndex } from '@/routes/sale';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -36,6 +37,11 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Purchase',
         href: PurchaseIndex(),
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Sale',
+        href: SaleIndex(),
         icon: LayoutGrid,
     },
 
