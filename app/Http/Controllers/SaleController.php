@@ -94,7 +94,8 @@ class SaleController extends Controller
             foreach ($validated['items'] as $item) {
 
                 //decrement the stock from inventory
-                $inventory = Inventory::findOrFail($item['inventory_id']);
+                /** @var Inventory $inventory */
+                $inventory = Inventory::query()->findOrFail($item['inventory_id']);
                 //validate the stock so cannot be minus
                 if ($inventory->quantity < $item['quantity']) {
                     throw ValidationException::withMessages([
