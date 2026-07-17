@@ -27,6 +27,7 @@ type Purchase = {
     id: number,
     purchase_date: string,
     notes: string | null,
+    created_by: string,
     items: Purchase_items[]
     total: number,
 }
@@ -57,6 +58,7 @@ export default function index({
 
                             <p>Date: {purchase.purchase_date}</p>
                             <p>Notes: {purchase.notes ?? "-"}</p>
+                            <p>Created By: {purchase.created_by ?? "-"}</p>
 
                             <div className="overflow-x-auto mt-4">
 

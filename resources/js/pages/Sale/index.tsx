@@ -29,6 +29,7 @@ type Sale = {
     id: number,
     sale_date: string,
     notes: string | null,
+    created_by: string,
     items: Sale_items[],
     total: number,
 }
@@ -60,6 +61,7 @@ export default function index({
 
                             <p>Date: {sale.sale_date}</p>
                             <p>Notes: {sale.notes ?? "-"}</p>
+                            <p>Created By: {sale.created_by ?? "-"}</p>
 
                             <div className="overflow-x-auto mt-4">
 
@@ -70,7 +72,7 @@ export default function index({
                                             <th>Grade</th>
                                             <th>Qty</th>
                                             <th>Discount</th>
-                                            <th>Unit Price</th>
+                                            <th>Unit Price (After Discounted)</th>
                                             <th>Total</th>
                                         </tr>
                                     </thead>
@@ -82,7 +84,7 @@ export default function index({
                                                 <td>{item.card.name}</td>
                                                 <td>{item.grade.name}</td>
                                                 <td>{item.quantity}</td>
-                                                <td>{item.discount}</td>
+                                                <td>{item.discount}%</td>
                                                 <td>{(item.unit_price ?? 0).toLocaleString('id-ID', {
                                                     style: 'currency',
                                                     currency: 'IDR',

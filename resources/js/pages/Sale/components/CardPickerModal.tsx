@@ -106,10 +106,12 @@ export default function CardPickerModal({
                                     <td>{inventory.grade.name}</td>
                                     <td>{inventory.quantity}</td>
                                     <td>
-                                        {inventory.asking_price.toLocaleString("id-ID", {
-                                            style: "currency",
-                                            currency: "IDR",
-                                        })}
+                                        {inventory.asking_price !== null
+                                            ? inventory.asking_price.toLocaleString("id-ID", {
+                                                style: "currency",
+                                                currency: "IDR",
+                                            })
+                                            : "-"}
                                     </td>
 
 

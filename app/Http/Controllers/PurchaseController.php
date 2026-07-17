@@ -9,6 +9,7 @@ use App\Models\Purchase;
 use App\Models\Purchase_item;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -21,13 +22,19 @@ class PurchaseController extends Controller
         //get the data
         $purchases = Purchase::with(
             'purchase_items.card',
-            'purchase_items.grade'
-        )->get();
+            'purchase_items.grade',
+            'user'
+        );
+        if(Auth::user()->role !== 'admin'){
+            $purchases->where('created_by', Auth::id());
+        }
+        $purchases = $purchases->get();
         $purchases = $purchases->map(function (Purchase $purchase) {
             return [
                 'id' => $purchase->id,
                 'purchase_date' => $purchase->purchase_date,
                 'notes' => $purchase->notes,
+                'created_by' => $purchase->user->name,
                 'items' => $purchase->purchase_items->map(function (Purchase_item $item) {
                     return [
                         'purchase_id' => $item->purchase_id,
@@ -43,10 +50,10 @@ class PurchaseController extends Controller
                         'unit_cost' => $item->unit_cost,
                     ];
                 }),
-                'total' => $purchase->purchase_items->map(fn(Purchase_item $item)=> $item->quantity * $item->unit_cost)->sum(),
+                'total' => $purchase->purchase_items->map(fn(Purchase_item $item) => $item->quantity * $item->unit_cost)->sum(),
             ];
         })->sortByDesc('id')
-        ->values();
+            ->values();
         // dd($purchases->first());
 
         return Inertia::render('Purchase/index', [
@@ -85,6 +92,7 @@ class PurchaseController extends Controller
             $purchase = Purchase::create([
                 'purchase_date' => $validated['purchase_date'],
                 'notes' => $validated['notes'] ?? null,
+                'created_by' => Auth::id(),
             ]);
 
             //store to purchase_items table

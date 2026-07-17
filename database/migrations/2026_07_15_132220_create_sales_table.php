@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('sale_date');
             $table->string('notes')->nullable();
+            $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

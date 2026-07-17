@@ -7,6 +7,7 @@ use App\Models\Sale;
 use App\Models\Sale_item;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
@@ -22,13 +23,19 @@ class SaleController extends Controller
             [
                 'sale_item.inventory.card.expansionSet',
                 'sale_item.inventory.grade',
+                'user',
             ]
-        )->get();
+        );
+        if(Auth::user()->role !== 'admin'){
+            $sales->where('created_by', Auth::id())->get();
+        }
+        $sales = $sales->get();
         $sales = $sales->map(function (Sale $sale) {
             return [
                 'id' => $sale->id,
                 'sale_date' => $sale->sale_date,
                 'notes' => $sale->notes,
+                'created_by' => $sale->user->name,
                 'items' => $sale->sale_item->map(function (Sale_item $item) {
                     return [
                         'sale_id' => $item->sale_id,
@@ -88,6 +95,7 @@ class SaleController extends Controller
             $sale = Sale::create([
                 'sale_date' => $validated['sale_date'],
                 'notes' => $validated['notes'] ?? null,
+                'created_by' => Auth::id(),
             ]);
 
             //store to sale_item table
