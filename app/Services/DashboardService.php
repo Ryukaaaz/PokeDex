@@ -10,6 +10,7 @@ use App\Models\Sale_item;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
 
 class DashboardService
 {
@@ -21,7 +22,7 @@ class DashboardService
             $query->where('created_by', Auth::id());
         }
 
-        return $query
+        return (int) $query
             ->whereDate('purchase_date', today())
             ->count();
     }
@@ -34,7 +35,7 @@ class DashboardService
             $query->where('created_by', Auth::id());
         }
 
-        return $query
+        return (int) $query
             ->whereDate('sale_date', today())
             ->count();
     }
@@ -80,7 +81,12 @@ class DashboardService
         return (int) $query
             ->sum(DB::raw('asking_price * quantity'));
     }
-
+    /**
+     * @return array<int, array{
+     *     date: string,
+     *     total: int
+     * }>
+     */
     public function purchaseChart(): array
     {
         $query = Purchase::query();
@@ -110,7 +116,12 @@ class DashboardService
         }
         return $chart;
     }
-
+    /**
+     * @return array<int, array{
+     *     date: string,
+     *     total: int
+     * }>
+     */
     public function saleChart(): array
     {
         $query = Sale::query();
@@ -141,6 +152,17 @@ class DashboardService
         return $chart;
     }
 
+    /**
+     * @return array<int, array{
+     *     purchase_date: string,
+     *     created_by: string,
+     *     card: string,
+     *     expansionSet: string,
+     *     grade: string,
+     *     quantity: int,
+     *     unit_cost: int
+     * }>
+     */
     public function purchasesLatest(int $limit = 2): array
     {
         //get lastest purchase items
@@ -174,6 +196,18 @@ class DashboardService
             ->toArray();
     }
 
+    /**
+     * @return array<int, array{
+     *     sale_date: string,
+     *     created_by: string,
+     *     card: string,
+     *     expansionSet: string,
+     *     grade: string,
+     *     quantity: int,
+     *     discount: int,
+     *     unit_price: int
+     * }>
+     */
     public function salesLatest(int $limit = 2): array
     {
         $query = Sale_item::with(
@@ -207,7 +241,10 @@ class DashboardService
             ->toArray();
     }
 
-    public function lowStock(int $threshold = 5)
+    /**
+     * @return Collection<int, Inventory>
+     */
+    public function lowStock(int $threshold = 5): Collection
     {
         $query = Inventory::with(['card.expansionSet', 'grade']);
 
