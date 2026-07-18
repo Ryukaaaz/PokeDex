@@ -13,7 +13,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
+import { index as dashboard } from '@/routes/dashboard';
 import { index as AdminExpansionIndex } from '@/routes/admin_expansion'
 import { index as ExpansionIndex } from '@/routes/expansion'
 import { index as GradeIndex } from '@/routes/grade'

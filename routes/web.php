@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExpansionSetController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RarityController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\InventoryController;
@@ -13,9 +14,7 @@ Route::inertia('/', 'welcome')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     //staff
-    Route::get('/dashboard', function () {
-        return Inertia\Inertia::render('dashboard/index');
-    })->name('dashboard');
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard.index');
 
     //inventory
     Route::get('/inventory', [InventoryController::class,'index'])->name('inventory.index');
