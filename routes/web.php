@@ -14,7 +14,7 @@ Route::inertia('/', 'welcome')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     //staff
-    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard.index');
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
     //inventory
     Route::get('/inventory', [InventoryController::class,'index'])->name('inventory.index');

@@ -1,5 +1,5 @@
 import { Head } from '@inertiajs/react';
-import { index as dashboard } from '@/routes/dashboard';
+import { dashboard } from '@/routes'; 
 import {
     ResponsiveContainer,
     LineChart,
