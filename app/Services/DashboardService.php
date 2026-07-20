@@ -57,21 +57,21 @@ class DashboardService
             ->sum(DB::raw('unit_price * quantity'));
     }
 
-    public function totalPurchaseToday(): int
+    public function profitToday(): int
     {
-        $query = Purchase_item::with(
-            'purchase',
-        );
+        $query = Sale_item::query()
+            ->join('inventories', 'sales_items.inventory_id', '=', 'inventories.id')
+            ->join('sales', 'sales_items.sale_id', '=', 'sales.id');
 
         if (Auth::user()->role !== 'admin') {
-            $query->whereHas('purchase', function ($query) {
-                $query->where('created_by', Auth::id());
-            });
+            $query->where('sales.created_by', Auth::id());
         }
 
         return (int) $query
-            ->whereDate('created_at', today())
-            ->sum(DB::raw('unit_cost * quantity'));
+            ->whereDate('sales.sale_date', today())
+            ->sum(DB::raw(
+                '(sales_items.unit_price - inventories.unit_cost) * sales_items.quantity'
+            ));
     }
 
     public function inventoryValue(): int

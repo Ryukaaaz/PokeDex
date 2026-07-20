@@ -20,6 +20,7 @@ type Inventory = {
     expansion_set_name: string,
     grade_name: string,
     asking_price: number,
+    unit_cost: number,
 }
 
 type allInventory = {
@@ -121,6 +122,7 @@ return true;
                             <th>Card Number</th>
                             <th>Grade</th>
                             <th>Quantity</th>
+                            <th>Unit Cost</th>
                             <th>Listing Price</th>
                         </tr>
                     </thead>
@@ -134,6 +136,12 @@ return true;
                                     <th>{inventory.card_number}</th>
                                     <th>{inventory.grade_name}</th>
                                     <th>{inventory.quantity}</th>
+                                    <th>
+                                        {(inventory.unit_cost ?? 0).toLocaleString('id-ID',{
+                                            style: 'currency',
+                                            currency: 'IDR',
+                                        })}
+                                    </th>
                                     <th>
                                         {(inventory.asking_price ?? 0).toLocaleString('id-ID',{
                                             style: 'currency',

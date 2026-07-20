@@ -13,7 +13,7 @@ class DashboardController extends Controller
 
     public function index(DashboardService $dashboard): Response
     {
-        $profit = $dashboard->revenueToday() - $dashboard->totalPurchaseToday();
+       
         return Inertia::render('dashboard/index', [
             'purchases' => $dashboard->purchasesLatest(),
             'sales' => $dashboard->salesLatest(),
@@ -22,7 +22,7 @@ class DashboardController extends Controller
             'saleChart' => $dashboard->saleChart(),
             'totalSale' => $dashboard->saleToday(),
             'revenueToday' => $dashboard->revenueToday(),
-            'profitToday' => $profit,
+            'profitToday' => $dashboard->profitToday(),
             'inventoryValue' => $dashboard->inventoryValue(),
             'lowStock' => $dashboard->lowStock(),
         ]);

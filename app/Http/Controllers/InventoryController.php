@@ -39,6 +39,7 @@ class InventoryController extends Controller
                 'grade_id' => $inventory->grade_id,
                 'quantity' => $inventory->quantity,
                 'asking_price' => $inventory->asking_price,
+                'unit_cost' => $inventory->unit_cost,
                 'card_number' => $inventory->card->card_number,
                 'card_name' => $inventory->card->name,
                 'expansion_set_name' => $inventory->card->expansionSet->name,

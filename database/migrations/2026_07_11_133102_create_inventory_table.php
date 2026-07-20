@@ -18,6 +18,8 @@ return new class extends Migration
             $table->unsignedInteger('quantity');
             //for listing price to sell 
             $table->unsignedInteger('asking_price')->nullable();
+            //for storing initial purchase cost
+            $table->unsignedInteger('unit_cost');
             $table->timestamps();
 
             //rule

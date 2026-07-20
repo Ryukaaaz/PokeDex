@@ -13,6 +13,7 @@ class Inventory extends Model
         'grade_id',
         'quantity',
         'asking_price',
+        'unit_cost'
     ];
 
     /**
