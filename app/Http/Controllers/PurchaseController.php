@@ -111,9 +111,9 @@ class PurchaseController extends Controller
                     ],
                 );
                 //increase the inventory quantity based on the card_id and grade_id
-                $inventory->quantity += $item['quantity'];
+                $inventory->quantity += (int) $item['quantity'];
                 $inventory->unit_cost = $item['unit_cost'];
-                $inventory->asking_price = ceil($item['unit_cost'] + ($item['unit_cost']* 0.30));
+                $inventory->asking_price = (int) ceil($item['unit_cost'] + ($item['unit_cost']* 0.30));
                 $inventory->save();
 
             }
