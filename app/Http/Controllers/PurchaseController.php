@@ -25,7 +25,7 @@ class PurchaseController extends Controller
             'purchase_items.grade',
             'user'
         );
-        if(Auth::user()->role !== 'admin'){
+        if (Auth::user()->role !== 'admin') {
             $purchases->where('created_by', Auth::id());
         }
         $purchases = $purchases->get();
@@ -97,6 +97,13 @@ class PurchaseController extends Controller
 
             //store to purchase_items table
             foreach ($validated['items'] as $item) {
+                /** @var array{
+                 *     card_id: int,
+                 *     grade_id: int,
+                 *     quantity: int<1, max>,
+                 *     unit_cost: int<0, max>
+                 * } $item
+                 */
                 $purchase->purchase_items()->create($item);
                 //increase the stock at inventory table if not found then create new
                 $inventory = Inventory::firstOrCreate(
@@ -107,15 +114,14 @@ class PurchaseController extends Controller
                     [
                         'quantity' => 0,
                         'unit_cost' => $item['unit_cost'],
-                        'asking_price' => ceil($item['unit_cost'] + ($item['unit_cost']* 0.30)),
+                        'asking_price' => ceil($item['unit_cost'] + ($item['unit_cost'] * 0.30)),
                     ],
                 );
                 //increase the inventory quantity based on the card_id and grade_id
-                $inventory->quantity += (int) $item['quantity'];
+                $inventory->quantity += $item['quantity'];
                 $inventory->unit_cost = $item['unit_cost'];
-                $inventory->asking_price = (int) ceil($item['unit_cost'] + ($item['unit_cost']* 0.30));
+                $inventory->asking_price = (int) ceil($item['unit_cost'] + ($item['unit_cost'] * 0.30));
                 $inventory->save();
-
             }
         });
 
