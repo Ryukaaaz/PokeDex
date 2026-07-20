@@ -105,6 +105,8 @@ class PurchaseController extends Controller
                  * } $item
                  */
                 $purchase->purchase_items()->create($item);
+                /** @var int<0, max> $askingPrice */
+                $askingPrice = (int) ceil($item['unit_cost'] + ($item['unit_cost']*0.30));
                 //increase the stock at inventory table if not found then create new
                 $inventory = Inventory::firstOrCreate(
                     [
@@ -114,13 +116,13 @@ class PurchaseController extends Controller
                     [
                         'quantity' => 0,
                         'unit_cost' => $item['unit_cost'],
-                        'asking_price' => ceil($item['unit_cost'] + ($item['unit_cost'] * 0.30)),
+                        'asking_price' => $askingPrice,
                     ],
                 );
                 //increase the inventory quantity based on the card_id and grade_id
                 $inventory->quantity += $item['quantity'];
                 $inventory->unit_cost = $item['unit_cost'];
-                $inventory->asking_price = (int) ceil($item['unit_cost'] + ($item['unit_cost'] * 0.30));
+                $inventory->asking_price = $askingPrice;
                 $inventory->save();
             }
         });
