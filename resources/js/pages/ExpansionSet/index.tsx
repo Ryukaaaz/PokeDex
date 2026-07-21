@@ -54,8 +54,8 @@ export default function Index({
     //filtered name options upon series change
     const filteredNameOPtions = allExpansionSets.filter((expansion) => {
         if (!filters.data.series) {
-return true;
-}
+            return true;
+        }
 
         return expansion.series === filters.data.series;
     }).map((expansion) => ({
@@ -87,7 +87,7 @@ return true;
                         value={filters.data.series}
                         onChange={(e) => {
                             filters.setData('series', e.target.value);
-                            filters.setData('name','');
+                            filters.setData('name', '');
                         }}
                         options={seriesOptions}
                         error={filters.errors.series}
@@ -116,8 +116,8 @@ return true;
                         <div className="card bg-base-100 w-full shadow-sm transition hover:shadow-xl hover:-translate-y-1 duration-300">
                             <figure className="relative">
                                 <img
-                                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                                    alt="Shoes" />
+                                    src="https://placehold.co/600x400?text=Expansion+Set"
+                                    alt="Expansion Set placeholder"/>
 
                                 <div className="badge badge-secondary absolute top-3 right-3 px-4 py-2 text-sm font-semibold">
                                     {expansion.language}

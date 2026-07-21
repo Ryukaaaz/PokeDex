@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { LayoutGrid } from 'lucide-react';
+import { LayoutGrid, LayoutDashboard, Warehouse, ShoppingCart, ReceiptText, Layers3, Sparkles, Award, Boxes } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -26,23 +26,23 @@ import type { NavItem } from '@/types';
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
+        href: dashboard(),  
+        icon: LayoutDashboard,
     },
     {
         title: 'Inventory',
         href: InventoryIndex(),
-        icon: LayoutGrid,
+        icon: Warehouse,
     },
     {
         title: 'Purchase',
         href: PurchaseIndex(),
-        icon: LayoutGrid,
+        icon: ShoppingCart,
     },
     {
         title: 'Sale',
         href: SaleIndex(),
-        icon: LayoutGrid,
+        icon: ReceiptText,
     },
 
 ];
@@ -51,38 +51,23 @@ const adminNavItems: NavItem[] = [
     {
         title: 'Cards',
         href: ExpansionIndex(),
-        icon: LayoutGrid,
+        icon: Layers3,
     },
     {
         title: 'Rarity',
         href: RarityIndex(),
-        icon: LayoutGrid,
+        icon: Sparkles,
     },
     {
         title: 'Grade',
         href: GradeIndex(),
-        icon: LayoutGrid,
+        icon: Award,
     },
     {
         title: 'Expansion Set',
         href: AdminExpansionIndex(),
-        icon: LayoutGrid,
+        icon: Boxes,
     },
-];
-
-
-
-const footerNavItems: NavItem[] = [
-    // {
-    //     title: 'Repository',
-    //     href: 'https://github.com/laravel/react-starter-kit',
-    //     icon: FolderGit2,
-    // },
-    // {
-    //     title: 'Documentation',
-    //     href: 'https://laravel.com/docs/starter-kits#react',
-    //     icon: BookOpen,
-    // },
 ];
 
 export function AppSidebar() {
@@ -116,7 +101,6 @@ export function AppSidebar() {
             </SidebarContent>
 
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
                 <NavUser />
             </SidebarFooter>
         </Sidebar>
