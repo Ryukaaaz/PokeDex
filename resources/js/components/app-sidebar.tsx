@@ -1,7 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
-import { LayoutGrid, LayoutDashboard, Warehouse, ShoppingCart, ReceiptText, Layers3, Sparkles, Award, Boxes } from 'lucide-react';
+import { LayoutDashboard, Warehouse, ShoppingCart, ReceiptText, Layers3, Sparkles, Award, Boxes } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
-import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import {
