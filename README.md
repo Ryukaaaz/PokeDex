@@ -2,6 +2,15 @@
 
 TradeDex is a modern Inventory Management System (IMS) and Point of Sale (POS) application built for Pokémon Trading Card Game (TCG) businesses.
 
+## Tech Stacks
+- Laravel
+- PHP
+- MYSQL
+- React
+- TypeScript
+- Inertia.js
+- Tailwind.css
+
 ## Goals
 
 - Manage raw and graded Pokémon cards
@@ -24,7 +33,6 @@ TradeDex is a modern Inventory Management System (IMS) and Point of Sale (POS) a
 ### Sales
 
 - POS
-- Barcode scanning
 - Discounts
 - Receipts
 
