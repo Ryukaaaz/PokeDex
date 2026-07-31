@@ -44,7 +44,7 @@ class GetInventory implements Tool
                     'quantity' => $item->quantity,
                 ];
             })->values()->toArray(),
-        ]);
+        ],JSON_THROW_ON_ERROR);
     }
 
     /**
