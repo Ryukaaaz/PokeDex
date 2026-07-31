@@ -1,5 +1,4 @@
 import { Head } from '@inertiajs/react';
-import { dashboard } from '@/routes'; 
 import {
     ResponsiveContainer,
     LineChart,
@@ -9,6 +8,8 @@ import {
     Tooltip,
     CartesianGrid,
 } from "recharts";
+import { formatIDR } from '@/lib/formatCurrency';
+import { dashboard } from '@/routes';
 
 type Purchase = {
     purchase_date: string,
@@ -153,7 +154,7 @@ export default function Dashboard({
                                     <>
                                         <span className="text-base text-base-content/60">Rp</span>
                                         <span className="ml-1 text-2xl font-bold text-success">
-                                            {(revenueToday).toLocaleString("id-ID")}
+                                            {formatIDR(revenueToday)}
                                         </span>
                                     </>
                                 )}
@@ -177,7 +178,7 @@ export default function Dashboard({
                                     <>
                                         <span className="text-base text-base-content/60">Rp</span>
                                         <span className="ml-1 text-2xl font-bold text-primary">
-                                            {(profitToday).toLocaleString("id-ID")}
+                                            {formatIDR(profitToday)}
                                         </span>
                                     </>
                                 )}
@@ -320,13 +321,7 @@ export default function Dashboard({
                                                     <td>{purchase.grade}</td>
                                                     <td>{purchase.quantity}</td>
                                                     <td>
-                                                        {(purchase.unit_cost * purchase.quantity).toLocaleString(
-                                                            "id-ID",
-                                                            {
-                                                                style: "currency",
-                                                                currency: "IDR",
-                                                            }
-                                                        )}
+                                                        {formatIDR(purchase.unit_cost * purchase.quantity)}         
                                                     </td>
                                                     <td>{purchase.created_by}</td>
                                                 </tr>
@@ -376,13 +371,9 @@ export default function Dashboard({
                                                     <td>{sale.grade}</td>
                                                     <td>{sale.quantity}</td>
                                                     <td>{sale.discount} %</td>
-                                                    <td>{(sale.unit_price * sale.quantity).toLocaleString(
-                                                        "id-ID",
-                                                        {
-                                                            style: 'currency',
-                                                            currency: "IDR",
-                                                        }
-                                                    )}</td>
+                                                    <td>
+                                                        {formatIDR(sale.unit_price * sale.quantity)}
+                                                    </td>
                                                     <td>{sale.created_by}</td>
                                                 </tr>
                                             ))
@@ -448,10 +439,7 @@ export default function Dashboard({
                                         </span>
 
                                         <span className="text-4xl font-bold text-success">
-                                            {(inventoryValue).toLocaleString("id-ID", {
-                                                style: 'currency',
-                                                currency: 'IDR',
-                                            })}
+                                            {formatIDR(inventoryValue)}
                                         </span></>
                                 )}
                             </div>

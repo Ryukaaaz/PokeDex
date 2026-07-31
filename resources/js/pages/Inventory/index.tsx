@@ -1,5 +1,6 @@
 import { Head, router, useForm } from "@inertiajs/react";
 import FormSelect from "@/components/form/FormSelect";
+import { formatIDR } from "@/lib/formatCurrency";
 import { index as InventoryIndex } from '@/routes/inventory'
 Index.layout = {
     breadcrumbs: [
@@ -137,16 +138,10 @@ return true;
                                     <th>{inventory.grade_name}</th>
                                     <th>{inventory.quantity}</th>
                                     <th>
-                                        {(inventory.unit_cost ?? 0).toLocaleString('id-ID',{
-                                            style: 'currency',
-                                            currency: 'IDR',
-                                        })}
+                                        {formatIDR(inventory.unit_cost)}
                                     </th>
                                     <th>
-                                        {(inventory.asking_price ?? 0).toLocaleString('id-ID',{
-                                            style: 'currency',
-                                            currency: 'IDR',
-                                        })}
+                                       {formatIDR(inventory.asking_price)}
                                     </th>
                                 </tr>
                             )

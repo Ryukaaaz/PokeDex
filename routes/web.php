@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AIAssistantController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExpansionSetController;
 use App\Http\Controllers\CardController;
@@ -30,6 +31,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //sale create
     Route::get('/sale/create',[SaleController::class,'show'])->name('sale.create');
     Route::post('/sale/create',[SaleController::class,'store'])->name('sale.store');
+
+    //ai assistant
+    Route::post('/ai/assistant',[AIAssistantController::class,'ask'])->name('ai.assistant');
 
     //admin
     Route::middleware('admin')->group(function () {

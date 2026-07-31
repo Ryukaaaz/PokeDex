@@ -44,38 +44,38 @@ export default function Index({
     function submit(e: React.SyntheticEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        if(form.processing) {
-return;
-}
+        if (form.processing) {
+            return;
+        }
 
         form.post(CardStore().url);
     }
 
-    function handleImageChange (e: React.ChangeEvent<HTMLInputElement>){
+    function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
         const file = e.target.files?.[0];
 
-        if(!file){
-return;
-}
+        if (!file) {
+            return;
+        }
 
-        if(file.size> 2* 1024*1024){
+        if (file.size > 2 * 1024 * 1024) {
             alert("Image must be smaller than 2 MB.");
 
             return;
         }
 
-        form.setData("image",file);
+        form.setData("image", file);
 
         setPreview(URL.createObjectURL(file));
 
     }
 
-    const rarity_options = rarities.map((rarity)=>({
+    const rarity_options = rarities.map((rarity) => ({
         value: rarity.id,
         label: rarity.name,
     }))
 
-    const [preview, setPreview] = useState<string | null> (null);
+    const [preview, setPreview] = useState<string | null>(null);
 
     return (
         <>
@@ -84,15 +84,15 @@ return;
             <form onSubmit={submit} className='max-w-full space-y-4 p-4'>
                 <div className='flex flex-col md:flex-row gap-4'>
                     <div className='flex-1 border'>
-                        <input type="file" accept='.jpg,.jpeg,.png' onChange={handleImageChange}/>
+                        <input type="file" accept='.jpg,.jpeg,.png' onChange={handleImageChange} />
 
-                        {form.errors.image&&(
+                        {form.errors.image && (
                             <p className='text-error'>{form.errors.image}</p>
                         )}
 
                         {preview ? (
                             <img src={preview} alt="Preview" className='w-full h-80 object-contain' />
-                        ): (
+                        ) : (
                             <p>No Image Selected</p>
                         )}
 
@@ -130,7 +130,7 @@ return;
                         <FormSelect
                             label='Rarity'
                             value={form.data.rarity}
-                            onChange={(e)=>
+                            onChange={(e) =>
                                 form.setData('rarity', e.target.value)
                             }
                             options={rarity_options}
@@ -140,10 +140,10 @@ return;
                     </div>
                 </div>
 
-                <button 
-                type='submit'
-                className='btn btn-primary'
-                disabled={form.processing}>
+                <button
+                    type='submit'
+                    className='btn btn-primary'
+                    disabled={form.processing}>
                     {form.processing && (
                         <span className='loading loading-spinner loading-sm'></span>
                     )}

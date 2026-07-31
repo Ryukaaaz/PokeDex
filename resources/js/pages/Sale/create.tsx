@@ -1,9 +1,9 @@
 import { Head, useForm } from "@inertiajs/react";
 import React, { useState } from "react";
+import FormInput from "@/components/form/FormInput";
 import { store as SaleStore } from "@/routes/sale";
 import { create as SaleCreate } from "@/routes/sale";
 import CardPickerModal from "./components/CardPickerModal";
-import FormInput from "@/components/form/FormInput";
 
 
 Create.layout = {
@@ -63,10 +63,13 @@ function Create({
     function submitForm(e: React.SyntheticEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        if (createForm.processing) return;
+        if (createForm.processing) {
+return;
+}
 
         createForm.post(SaleStore().url);
     }
+
     return (
         <>
             <Head title="Create New Sale" />

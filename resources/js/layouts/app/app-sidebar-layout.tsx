@@ -1,3 +1,4 @@
+import AIAssistant from '@/components/AI/AIAssistant';
 import { AppContent } from '@/components/app-content';
 import { AppShell } from '@/components/app-shell';
 import { AppSidebar } from '@/components/app-sidebar';
@@ -15,6 +16,8 @@ export default function AppSidebarLayout({
                 <AppSidebarHeader breadcrumbs={breadcrumbs} />
                 {children}
             </AppContent>
+
+            <AIAssistant/>
         </AppShell>
     );
 }

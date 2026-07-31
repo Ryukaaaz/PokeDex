@@ -1,4 +1,5 @@
 import { Head, router } from '@inertiajs/react';
+import { formatIDR } from '@/lib/formatCurrency';
 import { index as PurchaseIndex } from '@/routes/purchase';
 import { create as PurchaseCreate } from '@/routes/purchase';
 index.layout = {
@@ -80,25 +81,19 @@ export default function index({
                                                 <td>{item.card.name}</td>
                                                 <td>{item.grade.name}</td>
                                                 <td>{item.quantity}</td>
-                                                <td>{(item.unit_cost ?? 0).toLocaleString('id-ID', {
-                                                    style: 'currency',
-                                                    currency: 'IDR',
-
-                                                })}</td>
-                                                <td>{(item.quantity * item.unit_cost).toLocaleString('id-ID', {
-                                                    style: 'currency',
-                                                    currency: 'IDR',
-                                                })}</td>
+                                                <td>{formatIDR(item.unit_cost)}</td>
+                                                <td>
+                                                    {formatIDR(item.quantity * item.unit_cost)}
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td colSpan={4} className='text-right font-bold'> Total :</td>
-                                            <td className='text-right font-bold'>{(purchase.total).toLocaleString('id-ID',{
-                                                style: 'currency',
-                                                currency: 'IDR',
-                                            })}</td>
+                                            <td className='text-right font-bold'>
+                                                {formatIDR(purchase.total)}
+                                            </td>
 
                                         </tr>
                                     </tfoot>
